@@ -6,10 +6,8 @@ function Header() {
     <header className="bg-[#101a23] px-6 py-4">
       <div className="flex justify-between items-center">
         <div className="text-white text-xl font-semibold">Splitsavvy</div>
-
         <nav>
           <div className="flex gap-6 items-center text-white">
-            {/* ✅ These now inherit text-white cleanly */}
             <a href="#" className="hover:text-gray-300">
               Features
             </a>
@@ -19,7 +17,12 @@ function Header() {
             <a href="#" className="hover:text-gray-300">
               Contact
             </a>
-            <Button variant="contained">Get Started</Button>
+            <Button
+              variant="contained"
+              sx={{ textTransform: "none", borderRadius: 999 }}
+            >
+              Get Started
+            </Button>
           </div>
         </nav>
       </div>
