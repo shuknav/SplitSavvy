@@ -6,7 +6,7 @@ import SS4 from "./assets/SS4.png";
 
 function Preview() {
   return (
-    <div className="px-6 py-16 max-w-6xl mx-auto text-left text-white">
+    <div className="hidden md:block px-6 py-16 max-w-6xl mx-auto text-left text-white">
       <h2 className="text-4xl font-bold mb-4">SplitSavvy in Action</h2>
       <p className="text-slate-300 mb-10 max-w-2xl">
         Take a look at Splitsavvy in action and see how it can transform your

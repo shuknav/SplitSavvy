@@ -8,7 +8,7 @@ function LandingHero() {
       <img
         src={imageLanding}
         alt="illustration"
-        className="w-[250px] h-[375px] object-cover rounded-xl shadow-lg"
+        className="hidden md:block w-[250px] h-[375px] object-cover rounded-xl shadow-lg"
       />
       <div className="text-white flex flex-col justify-center h-[375px]">
         <h1 className="text-5xl font-bold leading-tight mb-4">

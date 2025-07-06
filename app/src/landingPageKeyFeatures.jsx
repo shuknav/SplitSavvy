@@ -9,7 +9,7 @@ function KeyFeatures() {
         Splitsavvy offers a range of features designed to make shared living
         easier and more enjoyable.
       </p>
-      <div className="flex flex-nowrap gap-6 overflow-x-auto">
+      <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-6 overflow-x-auto">
         <FeatureBox
           icon="💰"
           title="Expense Tracking"
