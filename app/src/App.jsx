@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Landing from "./landing";
+import Waitlist from "./Waitlist";
 
 function App() {
   return (
     <>
-      <Landing />
+      {/* <Landing /> */}
+      <Waitlist />
     </>
   );
 }
