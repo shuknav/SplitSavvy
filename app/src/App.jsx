@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Landing from "./landing";
-import Waitlist from "./Waitlist";
-import Login from "./login";
+import Landing from "./pages/landing";
+import Waitlist from "./pages/waitlist";
+import Login from "./pages/login";
 
 function App() {
   return (
     <>
-      {/* <Landing /> */}
+      <Landing />
       {/* <Waitlist /> */}
-      <Login />
+      {/* <Login /> */}
     </>
   );
 }

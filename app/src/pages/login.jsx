@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
-import Header from "./header";
-import Footer from "./footer";
+import Header from "../components/Header/header";
+import Footer from "../components/Footer/footer";
 
 function Login() {
   return (
