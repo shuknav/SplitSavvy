@@ -3,9 +3,11 @@ import { Box, TextField, Button } from "@mui/material";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
 import { submitToWaitlist } from "../api/waitlist";
+import { useNavigate } from "react-router-dom";
 
 function Waitlist() {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   function HandleEmailChange(event) {
     const emailInputField = event.target.value;
@@ -16,6 +18,7 @@ function Waitlist() {
     try {
       const data = await submitToWaitlist(email);
       console.log("success", data);
+      navigate("/waitlistSuccess");
     } catch (err) {
       console.log("error", err);
     }
