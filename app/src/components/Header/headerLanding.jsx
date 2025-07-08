@@ -8,7 +8,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  function HandleLoginClick() {
+  function HandleButtonClick() {
     navigate("/login");
   }
 
@@ -27,7 +27,7 @@ function Header() {
             Contact
           </a>
           <Button
-            onClick={HandleLoginClick}
+            onClick={HandleButtonClick}
             variant="contained"
             sx={{ textTransform: "none", borderRadius: 999, paddingX: 3 }}
           >
@@ -54,7 +54,7 @@ function Header() {
             Contact
           </a>
           <Button
-            onClick={HandleLoginClick}
+            onClick={HandleButtonClick}
             variant="contained"
             sx={{ textTransform: "none", borderRadius: 999 }}
           >

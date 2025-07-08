@@ -4,7 +4,7 @@ import Footer from "../components/Footer/footerLanding";
 import LandingHero from "../sections/home/landingPageHero";
 import KeyFeatures from "../sections/home/landingPageKeyFeatures";
 import Preview from "../sections/home/landingPageScreenshots";
-import Wishlist from "../sections/home/landingPageWishlist";
+import Waitlist from "../sections/home/landingPageWaitlist";
 
 function Landing() {
   return (
@@ -14,7 +14,7 @@ function Landing() {
         <LandingHero />
         <KeyFeatures />
         <Preview />
-        <Wishlist />
+        <Waitlist />
         <Footer />
       </div>
     </>

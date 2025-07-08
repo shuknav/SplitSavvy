@@ -1,7 +1,14 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
-function Wishlist() {
+function Waitlist() {
+  const navigate = useNavigate();
+
+  function HandleButtonClick() {
+    navigate("/waitlist");
+  }
+
   return (
     <div className="px-6 py-16 max-w-6xl mx-auto text-left text-white">
       <h2 className="text-4xl font-bold mb-4">
@@ -13,6 +20,7 @@ function Wishlist() {
       </p>
 
       <Button
+        onClick={HandleButtonClick}
         variant="contained"
         sx={{
           textTransform: "none",
@@ -21,10 +29,10 @@ function Wishlist() {
           paddingY: 1.5,
         }}
       >
-        Join Wishlist
+        Join Waitlist
       </Button>
     </div>
   );
 }
 
-export default Wishlist;
+export default Waitlist;

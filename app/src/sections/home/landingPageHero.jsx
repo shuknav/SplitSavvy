@@ -1,8 +1,15 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import imageLanding from "../../assets/image_landing.png";
+import { useNavigate } from "react-router-dom";
 
 function LandingHero() {
+  const navigate = useNavigate();
+
+  function HandleButtonClick() {
+    navigate("/waitlist");
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10">
       <img
@@ -23,6 +30,7 @@ function LandingHero() {
           automation and transparent, shared dashboards.
         </p>
         <Button
+          onClick={HandleButtonClick}
           variant="contained"
           sx={{
             textTransform: "none",
