@@ -24,7 +24,7 @@ function Header() {
             variant="contained"
             sx={{ textTransform: "none", borderRadius: 999, paddingX: 3 }}
           >
-            Get Started
+            Log in
           </Button>
         </nav>
         <button
