@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
+import { submitToWaitlist } from "../api/waitlist";
 
 function Waitlist() {
+  const [email, setEmail] = useState("");
+
+  function HandleEmailChange(event) {
+    const emailInputField = event.target.value;
+    setEmail(emailInputField);
+  }
+
+  async function HandleButtonClick() {
+    try {
+      const data = await submitToWaitlist(email);
+      console.log("success", data);
+    } catch (err) {
+      console.log("error", err);
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">
       <Header />
@@ -20,6 +37,8 @@ function Waitlist() {
 
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
           <TextField
+            value={email}
+            onChange={HandleEmailChange}
             fullWidth
             label="Email address"
             id="email-id"
@@ -38,6 +57,7 @@ function Waitlist() {
         </Box>
 
         <Button
+          onClick={HandleButtonClick}
           variant="contained"
           sx={{
             textTransform: "none",

@@ -6,8 +6,8 @@ import Login from "./pages/login";
 function App() {
   return (
     <>
-      <Landing />
-      {/* <Waitlist /> */}
+      {/* <Landing /> */}
+      <Waitlist />
       {/* <Login /> */}
     </>
   );
