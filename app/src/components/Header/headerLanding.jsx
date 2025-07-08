@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  function HandleLoginClick() {
+    navigate("/login");
+  }
 
   return (
     <header className="bg-[#101a23] px-6 py-4 text-white">
@@ -21,6 +27,7 @@ function Header() {
             Contact
           </a>
           <Button
+            onClick={HandleLoginClick}
             variant="contained"
             sx={{ textTransform: "none", borderRadius: 999, paddingX: 3 }}
           >
@@ -47,6 +54,7 @@ function Header() {
             Contact
           </a>
           <Button
+            onClick={HandleLoginClick}
             variant="contained"
             sx={{ textTransform: "none", borderRadius: 999 }}
           >
