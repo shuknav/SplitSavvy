@@ -2,6 +2,7 @@ import React from "react";
 import img_building from "../assets/img_building.png";
 
 function Success() {
+  // temporary maintenance page
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
       <h1 className="text-4xl md:text-5xl font-bold mb-6">

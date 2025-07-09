@@ -1,5 +1,8 @@
+//Import core react functionality
 import React from "react";
+//Import routing components from React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+//Import all the pages components used in routing
 import Landing from "./pages/landing";
 import Login from "./pages/login";
 import Waitlist from "./pages/waitlist";
@@ -13,6 +16,7 @@ import LoginUserNotFound from "./pages/loginUserNotExist";
 import Success from "./pages/success";
 import PageNotFound from "./pages/pageNotFound";
 
+//App functions defining all routes and structure of application
 function App() {
   return (
     <>
@@ -39,4 +43,5 @@ function App() {
   );
 }
 
+//Export default component
 export default App;

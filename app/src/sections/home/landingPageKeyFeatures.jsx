@@ -2,6 +2,7 @@ import React from "react";
 import FeatureBox from "./landinPageFeatureBox";
 
 function KeyFeatures() {
+  // key features component of landing page displays divs of feature by using component FeatureBox
   return (
     <div className="px-6 py-16 max-w-6xl mx-auto text-left text-white">
       <h2 className="text-4xl font-bold mb-4">Key Features</h2>

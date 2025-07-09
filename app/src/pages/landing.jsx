@@ -7,6 +7,7 @@ import Preview from "../sections/home/landingPageScreenshots";
 import Waitlist from "../sections/home/landingPageWaitlist";
 
 function Landing() {
+  //structure of lading page made up of many different components
   return (
     <>
       <div className="min-h-screen w-full bg-[#101a23] text-white">

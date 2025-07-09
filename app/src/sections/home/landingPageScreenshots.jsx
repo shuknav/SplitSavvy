@@ -5,6 +5,7 @@ import SS3 from "../../assets/SS3.png";
 import SS4 from "../../assets/SS4.png";
 
 function Preview() {
+  //landing page website screenshots part
   return (
     <div className="hidden md:block px-6 py-16 max-w-6xl mx-auto text-left text-white">
       <h2 className="text-4xl font-bold mb-4">SplitSavvy in Action</h2>

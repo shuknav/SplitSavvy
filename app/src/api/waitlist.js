@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BACKEND_URL;
+//api handling page for waitlist page
 
 export async function submitToWaitlist(email) {
   try {

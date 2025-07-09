@@ -4,8 +4,8 @@ import Footer from "../components/Footer/footer";
 import { useLocation } from "react-router-dom";
 
 function WaitlistStatus() {
-  const { state } = useLocation();
-  const { status, email } = state || {};
+  const { state } = useLocation(); //use location to get data from route navigation
+  const { status, email } = state || {}; // destructuring the data and intializing as || so that it doesnt break code when users directly visits this page
 
   return (
     <div className="min-h-screen flex flex-col bg-[#101a23] text-white">

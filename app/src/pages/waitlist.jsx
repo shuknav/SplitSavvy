@@ -11,16 +11,19 @@ function Waitlist() {
   const navigate = useNavigate();
 
   function isValidEmail(email) {
+    //function to validate email entered by user
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   function HandleEmailChange(event) {
+    //function handles email input field change
     const emailInputField = event.target.value;
     setEmail(emailInputField);
     if (isInvalid) setIsInvalid(false);
   }
 
   async function HandleButtonClick() {
+    //button responsible for validating email and adding user to waitlist
     if (!isValidEmail(email)) {
       setIsInvalid(true);
       return;

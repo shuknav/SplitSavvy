@@ -1,6 +1,7 @@
 import React from "react";
 
 function FeatureBox(props) {
+  //div for feature display made a seperate component for reusability
   return (
     <div className="bg-[#101a23] border border-slate-700 rounded-lg p-6 w-full sm:w-[260px] text-slate-300">
       <div className="text-2xl mb-2">{props.icon}</div>

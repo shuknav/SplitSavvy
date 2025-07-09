@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 function Waitlist() {
+  // last section of landing page for redirecting to waitlist register page
   const navigate = useNavigate();
 
   function HandleButtonClick() {

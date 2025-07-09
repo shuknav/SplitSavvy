@@ -6,16 +6,19 @@ function LoginEmailField(props) {
   const [isInvalid, setIsInvalid] = useState(false);
 
   function isValidEmail(email) {
+    //function to validate email enetered by user
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   function HandleEmailChange(event) {
+    //function to handle the email change in text field
     const emailInputField = event.target.value;
     setEmail(emailInputField);
     if (isInvalid) setIsInvalid(false);
   }
 
   function HandleButtonClick() {
+    //button checks for email validity and pass value of email to parent in order to verify in database
     if (!isValidEmail(email)) {
       setIsInvalid(true);
       return;

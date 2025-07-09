@@ -3,6 +3,7 @@ import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
 
 function WaitlistUser() {
+  // an edge case page for people trying to registering for waitlist even after having an account
   return (
     <div className="min-h-screen flex flex-col bg-[#101a23] text-white">
       <Header />

@@ -11,20 +11,24 @@ function LoginPasswordField(props) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   function isValidPassword(password) {
+    //funciton to makesure the user doesnt enter an empty field in password
     return password.trim() !== "";
   }
 
   function handleClickShowPasswordButton() {
+    //function manages visibility icon of the password
     setIsPasswordVisible(!isPasswordVisible);
   }
 
   function HandlePasswordChange(event) {
+    //function handling password change in input field
     const passwordInputField = event.target.value;
     setPassword(passwordInputField);
     if (isInvalid) setIsInvalid(false);
   }
 
   function HandleButtonClick() {
+    //funciton rensponsible for button functioning and passing the value to parent in order to verify the user
     if (!isValidPassword(password)) {
       setIsInvalid(true);
       return;

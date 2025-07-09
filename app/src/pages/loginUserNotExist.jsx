@@ -3,6 +3,7 @@ import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
 
 function LoginUserNotFound() {
+  //page user get redirected to if someone entered an email address without completing onboarding
   return (
     <div className="min-h-screen flex flex-col bg-[#101a23] text-white">
       <Header />

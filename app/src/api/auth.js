@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BACKEND_URL;
+//api logic handling page for authentication
 
 export async function loginEmailCheck(email) {
   try {

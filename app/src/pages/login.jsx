@@ -7,11 +7,13 @@ import { loginEmailCheck, loginCheck } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+  //structure of logi page and the page responsible for communicating from backend
   const navigate = useNavigate();
   const [showPasswordField, setShowPasswordField] = useState(false);
   const [email, setEmail] = useState("");
 
   async function HandleLoginEmailCheck(email) {
+    //verifies the email in user table
     try {
       const data = await loginEmailCheck(email);
       if (data.status == "user_exist") {
@@ -26,6 +28,7 @@ function Login() {
   }
 
   async function HandleLogin(password) {
+    //verify the user using password authentication
     try {
       const data = await loginCheck(email, password);
       if (data.status == "verified") {
@@ -38,6 +41,7 @@ function Login() {
     }
   }
 
+  // structure of the login page
   return (
     <>
       <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">

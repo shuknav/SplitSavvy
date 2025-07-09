@@ -3,13 +3,15 @@ import Button from "@mui/material/Button";
 import imageLanding from "../../assets/image_landing.png";
 import { useNavigate } from "react-router-dom";
 
+//useNavigate is used to route to different pages
 function LandingHero() {
   const navigate = useNavigate();
 
+  //forward the page to waitlist when get started button is clicked
   function HandleButtonClick() {
     navigate("/waitlist");
   }
-
+  //Landing page hero structure
   return (
     <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10">
       <img

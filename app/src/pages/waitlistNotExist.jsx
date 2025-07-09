@@ -3,6 +3,7 @@ import Header from "../components/Header/headerLanding";
 import Footer from "../components/Footer/footerLanding";
 
 function WaitlistUserNotExist() {
+  //a redirected webpages for people searching the status without joining the waitlist
   return (
     <div className="min-h-screen flex flex-col bg-[#101a23] text-white">
       <Header />
