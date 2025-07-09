@@ -17,11 +17,11 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/waitlist" element={<Waitlist />} />
-          <Route path="/waitlistSuccess" element={<WaitlistSuccess />} />
-          <Route path="/waitlistCheck" element={<WaitlistCheck />} />
-          <Route path="/WaitlistStatus" element={<WaitlistStatus />} />
-          <Route path="/WaitlistError" element={<WaitlistAlready />} />
-          <Route path="/WaitlistUserExist" element={<WaitlistUser />} />
+          <Route path="/waitlistsuccess" element={<WaitlistSuccess />} />
+          <Route path="/waitlistcheck" element={<WaitlistCheck />} />
+          <Route path="/waitliststatus" element={<WaitlistStatus />} />
+          <Route path="/waitlisterror" element={<WaitlistAlready />} />
+          <Route path="/waitlistuserexist" element={<WaitlistUser />} />
         </Routes>
       </BrowserRouter>
     </>

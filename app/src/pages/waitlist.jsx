@@ -19,11 +19,11 @@ function Waitlist() {
       const data = await submitToWaitlist(email);
       console.log("success", data);
       if (data.status == "user_exists") {
-        navigate("/WaitlistUserExist");
+        navigate("/waitlistuserexist");
       } else if (data.status == "already_waitlisted") {
-        navigate("/WaitlistError");
+        navigate("/waitlisterror");
       } else {
-        navigate("/waitlistSuccess");
+        navigate("/waitlistsuccess");
       }
     } catch (err) {
       console.log("error", err);
