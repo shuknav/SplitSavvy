@@ -31,6 +31,7 @@ function LoginPasswordField(props) {
     }
 
     setIsInvalid(false);
+    props.onClick(password);
   }
 
   return (

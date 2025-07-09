@@ -10,3 +10,14 @@ export async function loginEmailCheck(email) {
     throw err.response?.data || { error: "Something went wrong" };
   }
 }
+
+export async function loginCheck(email, password) {
+  try {
+    const res = await axios.get(
+      `${baseURL}/auth/login?email=${email}&password=${password}`
+    );
+    return res.data;
+  } catch (err) {
+    throw err.response?.data || { error: "Something went wrong" };
+  }
+}

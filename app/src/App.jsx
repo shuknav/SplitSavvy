@@ -10,6 +10,7 @@ import WaitlistAlready from "./pages/waitlistAlreadyExist";
 import WaitlistUser from "./pages/waitlistUserExist";
 import WaitlistUserNotExist from "./pages/waitlistNotExist";
 import LoginUserNotFound from "./pages/loginUserNotExist";
+import Success from "./pages/success";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             element={<WaitlistUserNotExist />}
           />
           <Route path="/usernotfound" element={<LoginUserNotFound />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </>
