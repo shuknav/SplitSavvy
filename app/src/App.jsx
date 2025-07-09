@@ -7,6 +7,7 @@ import WaitlistSuccess from "./pages/waitlistSuccess";
 import WaitlistCheck from "./pages/waitlistCheckPage";
 import WaitlistStatus from "./pages/waitlistStatus";
 import WaitlistAlready from "./pages/waitlistAlreadyExist";
+import WaitlistUser from "./pages/waitlistUserExist";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/waitlistCheck" element={<WaitlistCheck />} />
           <Route path="/WaitlistStatus" element={<WaitlistStatus />} />
           <Route path="/WaitlistError" element={<WaitlistAlready />} />
+          <Route path="/WaitlistUserExist" element={<WaitlistUser />} />
         </Routes>
       </BrowserRouter>
     </>
