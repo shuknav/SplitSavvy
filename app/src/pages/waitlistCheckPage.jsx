@@ -7,14 +7,26 @@ import { useNavigate } from "react-router-dom";
 
 function WaitlistCheck() {
   const [email, setEmail] = useState("");
+  const [isInvalid, setIsInvalid] = useState(false);
   const navigate = useNavigate();
 
   function HandleEmailChange(event) {
     const emailInputField = event.target.value;
     setEmail(emailInputField);
+    if (isInvalid) setIsInvalid(false);
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   async function HandleButtonClick() {
+    if (!isValidEmail(email)) {
+      setIsInvalid(true);
+      return;
+    }
+
+    setIsInvalid(false);
     try {
       const data = await checkInWaitlist(email);
       if (data.status == "user_exists") {
@@ -42,6 +54,8 @@ function WaitlistCheck() {
         </p>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
           <TextField
+            error={isInvalid}
+            helperText={isInvalid ? "Please enter a valid email address" : ""}
             value={email}
             onChange={HandleEmailChange}
             fullWidth
@@ -56,7 +70,9 @@ function WaitlistCheck() {
               },
             }}
             InputLabelProps={{
-              style: { color: "rgba(255, 255, 255, 0.6)" },
+              style: {
+                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
+              },
             }}
           />
         </Box>
