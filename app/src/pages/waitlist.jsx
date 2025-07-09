@@ -18,7 +18,13 @@ function Waitlist() {
     try {
       const data = await submitToWaitlist(email);
       console.log("success", data);
-      navigate("/waitlistSuccess");
+      if (data.status == "user_exists") {
+        navigate("/WaitlistUserExist");
+      } else if (data.status == "already_waitlisted") {
+        navigate("/WaitlistError");
+      } else {
+        navigate("/waitlistSuccess");
+      }
     } catch (err) {
       console.log("error", err);
     }
