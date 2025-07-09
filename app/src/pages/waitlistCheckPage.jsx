@@ -1,41 +1,28 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
-import { submitToWaitlist } from "../api/waitlist";
-import { useNavigate } from "react-router-dom";
+import Header from "../components/Header/headerLanding";
+import Footer from "../components/Footer/footerLanding";
 
-function Waitlist() {
+function WaitlistCheck() {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
 
   function HandleEmailChange(event) {
     const emailInputField = event.target.value;
     setEmail(emailInputField);
   }
 
-  async function HandleButtonClick() {
-    try {
-      const data = await submitToWaitlist(email);
-      console.log("success", data);
-      navigate("/waitlistSuccess");
-    } catch (err) {
-      console.log("error", err);
-    }
-  }
+  function HandleButtonClick() {}
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">
       <Header />
-
       <main className="flex flex-col items-center justify-center flex-grow px-6 py-16 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Join the Waitlist
+          Check the Status
         </h2>
         <p className="text-slate-300 max-w-xl mb-8">
-          Be among the first to simplify shared living with SplitSavvy — from
-          tracking expenses to syncing moods and managing payments, all in one
-          smart, shared dashboard.
+          Enter your email to see your current position on the waitlist or check
+          the status of your invitation..
         </p>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
           <TextField
@@ -67,20 +54,12 @@ function Waitlist() {
             paddingY: 1.5,
           }}
         >
-          Join Waitlist
+          Check Status
         </Button>
-        <p className="text-slate-300 max-w-xl mt-6">
-          Already applied?{" "}
-          <a href="#" className="underline text-blue-400 hover:text-blue-500">
-            Click here
-          </a>{" "}
-          to check your current status.
-        </p>
       </main>
-
       <Footer />
     </div>
   );
 }
 
-export default Waitlist;
+export default WaitlistCheck;
