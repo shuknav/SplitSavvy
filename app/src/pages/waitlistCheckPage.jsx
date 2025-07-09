@@ -17,7 +17,13 @@ function WaitlistCheck() {
   async function HandleButtonClick() {
     try {
       const data = await checkInWaitlist(email);
-      navigate("/waitliststatus", { state: { status: data, email } });
+      if (data.status == "user_exists") {
+        navigate("/waitlistuserexist");
+      } else if (data.status == "not_exists") {
+        navigate("/waitlistusernotexist");
+      } else {
+        navigate("/waitliststatus", { state: { status: data, email } });
+      }
     } catch (err) {
       console.log("error", err);
     }
