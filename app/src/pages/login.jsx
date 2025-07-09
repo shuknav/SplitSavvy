@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginEmailField from "./loginEmail";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
 import { loginEmailCheck } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+  const [showPasswordField, setShowPasswordField] = useState(false);
+  const [email, setEmail] = useState("");
+
   async function HandleLoginEmailCheck(email) {
     try {
       const data = await loginEmailCheck(email);
       if (data.status == "user_exist") {
-        console.log("success");
+        setEmail(email);
       } else if (data.status == "user_not_exist") {
-        console.log("no user");
+        navigate("/usernotfound");
       }
     } catch (err) {
       console.log(err);

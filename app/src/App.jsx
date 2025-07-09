@@ -9,6 +9,7 @@ import WaitlistStatus from "./pages/waitlistStatus";
 import WaitlistAlready from "./pages/waitlistAlreadyExist";
 import WaitlistUser from "./pages/waitlistUserExist";
 import WaitlistUserNotExist from "./pages/waitlistNotExist";
+import LoginUserNotFound from "./pages/loginUserNotExist";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             path="/waitlistusernotexist"
             element={<WaitlistUserNotExist />}
           />
+          <Route path="/usernotfound" element={<LoginUserNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
