@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import Waitlist from "./pages/waitlist";
 import WaitlistSuccess from "./pages/waitlistSuccess";
 import WaitlistCheck from "./pages/waitlistCheckPage";
+import WaitlistStatus from "./pages/waitlistStatus";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/waitlistSuccess" element={<WaitlistSuccess />} />
           <Route path="/waitlistCheck" element={<WaitlistCheck />} />
+          <Route path="/WaitlistStatus" element={<WaitlistStatus />} />
         </Routes>
       </BrowserRouter>
     </>
