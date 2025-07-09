@@ -26,7 +26,10 @@ function WaitlistAlready() {
         </p>
         <p className="text-slate-300 max-w-xl">
           🔍 Want to track your status?{" "}
-          <a href="#" className="underline text-blue-400 hover:text-blue-500">
+          <a
+            href="/waitlistcheck"
+            className="underline text-blue-400 hover:text-blue-500"
+          >
             Click here
           </a>{" "}
           to see your current waitlist position.

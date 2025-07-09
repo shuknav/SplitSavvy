@@ -12,3 +12,12 @@ export async function submitToWaitlist(email) {
     throw err.response?.data || { error: "Something went wrong" };
   }
 }
+
+export async function checkInWaitlist(email) {
+  try {
+    const res = await axios.get(`${baseURL}/waitlist/check?email=${email}`);
+    return res.data;
+  } catch (err) {
+    throw err.response?.data || { error: "Something went wrong" };
+  }
+}

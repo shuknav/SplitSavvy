@@ -77,7 +77,10 @@ function Waitlist() {
         </Button>
         <p className="text-slate-300 max-w-xl mt-6">
           Already applied?{" "}
-          <a href="#" className="underline text-blue-400 hover:text-blue-500">
+          <a
+            href="/waitlistcheck"
+            className="underline text-blue-400 hover:text-blue-500"
+          >
             Click here
           </a>{" "}
           to check your current status.

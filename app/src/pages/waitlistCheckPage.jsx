@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import Header from "../components/Header/headerLanding";
 import Footer from "../components/Footer/footerLanding";
+import { checkInWaitlist } from "../api/waitlist";
+import { useNavigate } from "react-router-dom";
 
 function WaitlistCheck() {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   function HandleEmailChange(event) {
     const emailInputField = event.target.value;
     setEmail(emailInputField);
   }
 
-  function HandleButtonClick() {}
+  async function HandleButtonClick() {
+    try {
+      const data = await checkInWaitlist(email);
+      navigate("/waitliststatus", { state: { status: data, email } });
+    } catch (err) {
+      console.log("error", err);
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">

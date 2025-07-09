@@ -1,8 +1,12 @@
 import React from "react";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
+import { useLocation } from "react-router-dom";
 
 function WaitlistStatus() {
+  const { state } = useLocation();
+  const { status, email } = state || {};
+
   return (
     <div className="min-h-screen flex flex-col bg-[#101a23] text-white">
       <Header />
@@ -19,7 +23,24 @@ function WaitlistStatus() {
           Here’s your current waitlist status. We’ll notify you as soon as you
           move forward in the queue.
         </p>
-        <p className="text-slate-300 max-w-xl">status.</p>
+        <p
+          className={`max-w-xl font-semibold ${
+            status === "pending"
+              ? "text-yellow-400"
+              : status === "approved"
+              ? "text-green-400"
+              : "text-red-400"
+          }`}
+        >
+          {status === "pending" &&
+            `⏳ Hang tight, ${email}! Your request is still brewing in our system — we'll spill the tea by Monday.`}
+
+          {status === "approved" &&
+            `✅ Hey ${email}, you're officially IN! 🎉 Get ready — SplitSavvy magic is coming your way.`}
+
+          {status === "cancelled" &&
+            `❌ Uh-oh, ${email} — looks like your request hit a snag. But hey, we're always here if you want to try again. You can rejoin the waitlist after 48 hours.`}
+        </p>
       </main>
 
       <Footer />
