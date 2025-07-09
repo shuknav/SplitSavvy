@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LoginPasswordField from "./loginPassword";
 import LoginEmailField from "./loginEmail";
 import Header from "../components/Header/header";
 import Footer from "../components/Footer/footer";
@@ -15,6 +16,7 @@ function Login() {
       const data = await loginEmailCheck(email);
       if (data.status == "user_exist") {
         setEmail(email);
+        setShowPasswordField(true);
       } else if (data.status == "user_not_exist") {
         navigate("/usernotfound");
       }
@@ -27,7 +29,11 @@ function Login() {
     <>
       <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">
         <Header />
-        <LoginEmailField onClick={HandleLoginEmailCheck} />
+        {showPasswordField ? (
+          <LoginPasswordField email={email} />
+        ) : (
+          <LoginEmailField onClick={HandleLoginEmailCheck} />
+        )}
         <Footer />
       </div>
     </>
