@@ -6,7 +6,7 @@ import Waitlist from "./pages/waitlist";
 import WaitlistSuccess from "./pages/waitlistSuccess";
 import WaitlistCheck from "./pages/waitlistCheckPage";
 import WaitlistStatus from "./pages/waitlistStatus";
-import WaitlistAlready from "./pages/waitlistAlreadyExsits";
+import WaitlistAlready from "./pages/waitlistAlreadyExist";
 
 function App() {
   return (
