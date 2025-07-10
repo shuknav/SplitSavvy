@@ -15,6 +15,7 @@ function AdminLanding() {
       const data = await AdminLogin(password);
       if (data.result == true) {
         console.log("login Successful");
+        document.cookie = "admin_token=valid; path=/admindashboard";
       } else {
         console.log("login failed incorrect password");
       }
