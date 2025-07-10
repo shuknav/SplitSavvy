@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import { AdminLogin } from "../api/admin";
+import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function HandlePasswordChange(event) {
     const passwordInputField = event.target.value;
@@ -15,7 +17,8 @@ function AdminLanding() {
       const data = await AdminLogin(password);
       if (data.result == true) {
         console.log("login Successful");
-        document.cookie = "admin_token=valid; path=/admindashboard";
+        document.cookie = "admin_token=valid; path=/";
+        navigate("/admindashboard");
       } else {
         console.log("login failed incorrect password");
       }
