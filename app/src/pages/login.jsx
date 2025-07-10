@@ -32,7 +32,7 @@ function Login() {
     try {
       const data = await loginCheck(email, password);
       if (data.status == "verified") {
-        navigate("/success");
+        navigate("/success", { state: { status: true } });
       } else if (data.status == "not_verified") {
         navigate("/usernotfound");
       }
