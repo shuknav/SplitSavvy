@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import { AdminLogin } from "../api/admin";
 
 function AdminLanding() {
   const [password, setPassword] = useState("");
@@ -9,8 +10,17 @@ function AdminLanding() {
     setPassword(passwordInputField);
   }
 
-  function HandleButtonClick() {
-    console.log(password);
+  async function HandleButtonClick() {
+    try {
+      const data = await AdminLogin(password);
+      if (data.result == true) {
+        console.log("login Successful");
+      } else {
+        console.log("login failed incorrect password");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
