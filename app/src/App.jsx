@@ -17,6 +17,7 @@ import Success from "./pages/success";
 import PageNotFound from "./pages/pageNotFound";
 import AdminLanding from "./pages/adminLanding";
 import AdminDashboard from "./pages/adminDashboard";
+import AdminStats from "./pages/adminDashboardStatus";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/success" element={<Success />} />
           <Route path="/admin" element={<AdminLanding />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/adminstats" element={<AdminStats />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
