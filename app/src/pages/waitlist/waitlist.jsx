@@ -61,10 +61,57 @@ function Waitlist() {
         </p>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
           <TextField
+            // error={isInvalid}
+            // helperText={isInvalid ? "Please enter a valid email address" : ""}
+            // value={email}
+            // onChange={HandleEmailChange}
+            sx={{ mb: 2 }}
+            fullWidth
+            label="First Name"
+            id="fName"
+            variant="outlined"
+            InputProps={{
+              style: {
+                backgroundColor: "#1f2a35",
+                color: "white",
+                borderRadius: 999,
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
+              },
+            }}
+          />
+          <TextField
+            // error={isInvalid}
+            // helperText={isInvalid ? "Please enter a valid email address" : ""}
+            // value={email}
+            // onChange={HandleEmailChange}
+            sx={{ mb: 2 }}
+            fullWidth
+            label="Last Name"
+            id="lName"
+            variant="outlined"
+            InputProps={{
+              style: {
+                backgroundColor: "#1f2a35",
+                color: "white",
+                borderRadius: 999,
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
+              },
+            }}
+          />
+          <TextField
             error={isInvalid}
             helperText={isInvalid ? "Please enter a valid email address" : ""}
             value={email}
             onChange={HandleEmailChange}
+            sx={{ mb: 2 }}
             fullWidth
             label="Email address"
             id="email-id"
