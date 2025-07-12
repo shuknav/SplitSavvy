@@ -55,7 +55,9 @@ function LoginEmailField(props) {
           }}
         />
       </Box>
-
+      <a href="#" className="mb-2">
+        Forgot your password?
+      </a>
       <Button
         onClick={HandleButtonClick}
         variant="contained"
