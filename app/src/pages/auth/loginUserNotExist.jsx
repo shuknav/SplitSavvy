@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
 
 function LoginUserNotFound() {
   //page user get redirected to if someone entered an email address without completing onboarding

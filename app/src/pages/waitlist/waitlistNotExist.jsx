@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header/headerLanding";
-import Footer from "../components/Footer/footerLanding";
+import Header from "../../components/Header/headerLanding";
+import Footer from "../../components/Footer/footerLanding";
 
 function WaitlistUserNotExist() {
   //a redirected webpages for people searching the status without joining the waitlist

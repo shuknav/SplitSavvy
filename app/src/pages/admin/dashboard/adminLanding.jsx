@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import { AdminLogin } from "../api/admin";
+import { AdminLogin } from "../../../api/admin";
 import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {

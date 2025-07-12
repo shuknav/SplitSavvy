@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import LoginPasswordField from "./loginPassword";
 import LoginEmailField from "./loginEmail";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
-import { loginEmailCheck, loginCheck } from "../api/auth";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
+import { loginEmailCheck, loginCheck } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

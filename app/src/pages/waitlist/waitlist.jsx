@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
-import { submitToWaitlist } from "../api/waitlist";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
+import { submitToWaitlist } from "../../api/waitlist";
 import { useNavigate } from "react-router-dom";
 
 function Waitlist() {

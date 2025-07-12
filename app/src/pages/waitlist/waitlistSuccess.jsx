@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
 
 function WaitlistSuccess() {
   //a redirect success page to tell user they have successfully registered into waitlist and when they can expect results

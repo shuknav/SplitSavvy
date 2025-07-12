@@ -3,21 +3,21 @@ import React from "react";
 //Import routing components from React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Import all the pages components used in routing
-import Landing from "./pages/landing";
-import Login from "./pages/login";
-import Waitlist from "./pages/waitlist";
-import WaitlistSuccess from "./pages/waitlistSuccess";
-import WaitlistCheck from "./pages/waitlistCheckPage";
-import WaitlistStatus from "./pages/waitlistStatus";
-import WaitlistAlready from "./pages/waitlistAlreadyExist";
-import WaitlistUser from "./pages/waitlistUserExist";
-import WaitlistUserNotExist from "./pages/waitlistNotExist";
-import LoginUserNotFound from "./pages/loginUserNotExist";
+import Landing from "./layouts/landing";
+import Login from "./pages/auth/login";
+import Waitlist from "./pages/waitlist/waitlist";
+import WaitlistSuccess from "./pages/waitlist/waitlistSuccess";
+import WaitlistCheck from "./pages/waitlist/waitlistCheckPage";
+import WaitlistStatus from "./pages/waitlist/waitlistStatus";
+import WaitlistAlready from "./pages/waitlist/waitlistAlreadyExist";
+import WaitlistUser from "./pages/waitlist/waitlistUserExist";
+import WaitlistUserNotExist from "./pages/waitlist/waitlistNotExist";
+import LoginUserNotFound from "./pages/auth/loginUserNotExist";
 import Success from "./pages/success";
 import PageNotFound from "./pages/pageNotFound";
-import AdminLanding from "./pages/adminLanding";
-import AdminDashboard from "./pages/adminDashboard";
-import AdminAcceptLog from "./pages/adminAcceptLogs";
+import AdminLanding from "./pages/admin/dashboard/adminLanding";
+import AdminDashboard from "./layouts/adminDashboard";
+import AdminAcceptLog from "./pages/admin/logs/adminAcceptLogs";
 
 //App functions defining all routes and structure of application
 function App() {

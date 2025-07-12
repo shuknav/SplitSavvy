@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
 
 function WaitlistUser() {
   // an edge case page for people trying to registering for waitlist even after having an account
