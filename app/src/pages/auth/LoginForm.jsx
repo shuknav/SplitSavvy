@@ -7,9 +7,17 @@ function LoginForm() {
   return (
     <>
       <main className="flex flex-col items-center justify-center flex-grow px-6 py-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Log in</h2>
+        {/* <h2 className="text-3xl md:text-4xl font-bold mb-4">Log in</h2>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
           <InputField label="Email Address" id="email" type="text" />
+        </Box>
+        <ButtonField text="Continue" /> */}
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Enter your Password
+        </h2>
+        <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
+          <InputField label="Email Address" id="email" type="text" />
+          <InputField label="Password" id="password" type="password" />
         </Box>
         <a href="#" className="mb-2">
           Forgot your password?
