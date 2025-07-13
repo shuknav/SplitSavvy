@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import InputField from "../../components/InputField";
+import ButtonField from "../../components/ButtonField";
 
 function LoginForm() {
   return (
@@ -14,18 +14,7 @@ function LoginForm() {
         <a href="#" className="mb-2">
           Forgot your password?
         </a>
-        <Button
-          // onClick={HandleButtonClick}
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            borderRadius: 999,
-            paddingX: 4,
-            paddingY: 1.5,
-          }}
-        >
-          Continue
-        </Button>
+        <ButtonField text="Continue" />
       </main>
     </>
   );
