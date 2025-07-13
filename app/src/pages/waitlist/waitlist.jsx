@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import InputField from "../../components/InputField";
+import ButtonField from "../../components/ButtonField";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
 import { submitToWaitlist } from "../../api/waitlist";
@@ -60,88 +62,11 @@ function Waitlist() {
           smart, shared dashboard.
         </p>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
-          <TextField
-            // error={isInvalid}
-            // helperText={isInvalid ? "Please enter a valid email address" : ""}
-            // value={email}
-            // onChange={HandleEmailChange}
-            sx={{ mb: 2 }}
-            fullWidth
-            label="First Name"
-            id="fName"
-            variant="outlined"
-            InputProps={{
-              style: {
-                backgroundColor: "#1f2a35",
-                color: "white",
-                borderRadius: 999,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
-              },
-            }}
-          />
-          <TextField
-            // error={isInvalid}
-            // helperText={isInvalid ? "Please enter a valid email address" : ""}
-            // value={email}
-            // onChange={HandleEmailChange}
-            sx={{ mb: 2 }}
-            fullWidth
-            label="Last Name"
-            id="lName"
-            variant="outlined"
-            InputProps={{
-              style: {
-                backgroundColor: "#1f2a35",
-                color: "white",
-                borderRadius: 999,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
-              },
-            }}
-          />
-          <TextField
-            error={isInvalid}
-            helperText={isInvalid ? "Please enter a valid email address" : ""}
-            value={email}
-            onChange={HandleEmailChange}
-            sx={{ mb: 2 }}
-            fullWidth
-            label="Email address"
-            id="email-id"
-            variant="outlined"
-            InputProps={{
-              style: {
-                backgroundColor: "#1f2a35",
-                color: "white",
-                borderRadius: 999,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
-              },
-            }}
-          />
+          <InputField label="Email Address" id="email" type="text" />
+          <InputField label="First Name" id="fName" type="text" />
+          <InputField label="Last Name" id="lName" type="text" />
         </Box>
-        <Button
-          onClick={HandleButtonClick}
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            borderRadius: 999,
-            paddingX: 4,
-            paddingY: 1.5,
-          }}
-        >
-          Join Waitlist
-        </Button>
+        <ButtonField text="Continue" />
         <p className="text-slate-300 max-w-xl mt-6">
           Already applied?{" "}
           <a
