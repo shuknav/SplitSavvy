@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginPasswordField from "./loginPassword";
 import LoginEmailField from "./loginEmail";
+import LoginForm from "./LoginForm";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
 import { loginEmailCheck, loginCheck } from "../../api/auth";
@@ -46,11 +47,12 @@ function Login() {
     <>
       <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">
         <Header />
-        {showPasswordField ? (
+        <LoginForm />
+        {/* {showPasswordField ? (
           <LoginPasswordField email={email} onClick={HandleLogin} />
         ) : (
           <LoginEmailField onClick={HandleLoginEmailCheck} />
-        )}
+        )} */}
         <Footer />
       </div>
     </>
