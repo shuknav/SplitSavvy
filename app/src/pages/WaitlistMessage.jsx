@@ -6,7 +6,7 @@ import waitlistMessages from "../constants/waitlistMessages";
 
 function WaitlistMessage() {
   const { state } = useLocation();
-  const { type = "success", email = "", status = "" } = state || {};
+  const { type = "success", fullName = "", status = "" } = state || {};
   const content = waitlistMessages[type];
 
   const getStatusColor = () => {
@@ -46,11 +46,11 @@ function WaitlistMessage() {
         {type === "status" && (
           <p className={`max-w-xl font-semibold ${getStatusColor()}`}>
             {status === "pending" &&
-              `⏳ Hang tight, ${email}! Your request is still brewing in our system — we'll spill the tea by Monday.`}
+              `⏳ Hang tight, ${fullName}! Your request is still brewing in our system — we'll spill the tea by Monday.`}
             {status === "approved" &&
-              `✅ Hey ${email}, you're officially IN! 🎉 Get ready — SplitSavvy magic is coming your way.`}
+              `✅ Hey ${fullName}, you're officially IN! 🎉 Get ready — SplitSavvy magic is coming your way.`}
             {status === "cancelled" &&
-              `❌ Uh-oh, ${email} — looks like your request hit a snag. But hey, we're always here if you want to try again. You can rejoin the waitlist after 48 hours.`}
+              `❌ Uh-oh, ${fullName} — looks like your request hit a snag. But hey, we're always here if you want to try again. You can rejoin the waitlist after 48 hours.`}
           </p>
         )}
       </main>
