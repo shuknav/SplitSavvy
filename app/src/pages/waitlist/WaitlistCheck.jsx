@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import InputField from "../components/InputField";
-import ButtonField from "../components/ButtonField";
-import Header from "../components/Header/headerLanding";
-import Footer from "../components/Footer/footerLanding";
-import { checkInWaitlist } from "../api/waitlist";
+import InputField from "../../components/InputField";
+import ButtonField from "../../components/ButtonField";
+import Header from "../../components/Header/headerLanding";
+import Footer from "../../components/Footer/footerLanding";
+import { checkInWaitlist } from "../../api/waitlist";
 import { useNavigate } from "react-router-dom";
 
 function WaitlistCheck() {
