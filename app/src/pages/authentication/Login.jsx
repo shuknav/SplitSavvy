@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
-import { loginEmailCheck, loginCheck } from "../../api/auth";
+import { loginEmailCheck, loginVerify } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -27,23 +27,18 @@ function Login() {
     }
   }
 
-  function HandleLogin(password) {
+  async function HandleLogin(password) {
     //verify the user using password authentication
-    if (password === "Abhinav_Splitsavvy@3010") {
-      console.log("welcome");
-    } else {
-      console.log("incorrect password");
+    try {
+      const data = await loginVerify(email, password);
+      if (data.result == true) {
+        console.log("logged in");
+      } else if (data.result == false) {
+        console.log("enter correct password");
+      }
+    } catch (err) {
+      console.log(err);
     }
-    // try {
-    //   const data = await loginCheck(email, password);
-    //   if (data.status == "verified") {
-    //     navigate("/success", { state: { status: true } });
-    //   } else if (data.status == "not_verified") {
-    //     navigate("/usernotfound");
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }
 
   // structure of the login page

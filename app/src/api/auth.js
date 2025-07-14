@@ -12,11 +12,12 @@ export async function loginEmailCheck(email) {
   }
 }
 
-export async function loginCheck(email, password) {
+export async function loginVerify(email, password) {
   try {
-    const res = await axios.get(
-      `${baseURL}/auth/login?email=${email}&password=${password}`
-    );
+    const res = await axios.post(`${baseURL}/auth/login`, {
+      email,
+      password,
+    });
     return res.data;
   } catch (err) {
     throw err.response?.data || { error: "Something went wrong" };
