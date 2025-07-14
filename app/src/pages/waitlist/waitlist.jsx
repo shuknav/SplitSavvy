@@ -1,47 +1,36 @@
-import React, { useState } from "react";
-import { Box, TextField, Button } from "@mui/material";
-import InputField from "../../components/InputField";
-import ButtonField from "../../components/ButtonField";
-import Header from "../../components/Header/header";
-import Footer from "../../components/Footer/footer";
-import { submitToWaitlist } from "../../api/waitlist";
+import React from "react";
+import Header from "../components/Header/header";
+import Footer from "../components/Footer/footer";
+import { submitToWaitlist } from "../api/waitlist";
 import { useNavigate } from "react-router-dom";
+import WaitlistForm from "./WaitlistForm";
 
 function Waitlist() {
-  const [email, setEmail] = useState("");
-  const [isInvalid, setIsInvalid] = useState(false);
   const navigate = useNavigate();
-
-  function isValidEmail(email) {
-    //function to validate email entered by user
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function HandleEmailChange(event) {
-    //function handles email input field change
-    const emailInputField = event.target.value;
-    setEmail(emailInputField);
-    if (isInvalid) setIsInvalid(false);
-  }
-
-  async function HandleButtonClick() {
+  async function handleWaitlistSubmit(firstName, lastName, email) {
     //button responsible for validating email and adding user to waitlist
-    if (!isValidEmail(email)) {
-      setIsInvalid(true);
-      return;
-    }
-
-    setIsInvalid(false);
-
+    // setIsInvalid(false);
     try {
-      const data = await submitToWaitlist(email);
+      const data = await submitToWaitlist(firstName, lastName, email);
       console.log("success", data);
       if (data.status === "user_exists") {
-        navigate("/waitlistuserexist");
+        navigate("/waitlistmessage", {
+          state: {
+            type: "user",
+          },
+        });
       } else if (data.status === "already_waitlisted") {
-        navigate("/waitlisterror");
+        navigate("/waitlistmessage", {
+          state: {
+            type: "already",
+          },
+        });
       } else {
-        navigate("/waitlistsuccess");
+        navigate("/waitlistmessage", {
+          state: {
+            type: "success",
+          },
+        });
       }
     } catch (err) {
       console.log("error", err);
@@ -51,7 +40,6 @@ function Waitlist() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#101a23] text-white">
       <Header />
-
       <main className="flex flex-col items-center justify-center flex-grow px-6 py-16 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Join the Waitlist
@@ -61,24 +49,8 @@ function Waitlist() {
           tracking expenses to syncing moods and managing payments, all in one
           smart, shared dashboard.
         </p>
-        <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
-          <InputField label="First Name" id="fName" type="text" />
-          <InputField label="Last Name" id="lName" type="text" />
-          <InputField label="Email Address" id="email" type="text" />
-        </Box>
-        <ButtonField text="Continue" />
-        <p className="text-slate-300 max-w-xl mt-6">
-          Already applied?{" "}
-          <a
-            href="/waitlistcheck"
-            className="underline text-blue-400 hover:text-blue-500"
-          >
-            Click here
-          </a>{" "}
-          to check your current status.
-        </p>
+        <WaitlistForm onSubmit={handleWaitlistSubmit} />
       </main>
-
       <Footer />
     </div>
   );
