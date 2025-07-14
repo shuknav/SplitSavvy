@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
 
-function InputField({ label, id, type }) {
+function InputField({
+  label,
+  id,
+  type,
+  value,
+  handleChange,
+  isInvalid,
+  helperText,
+}) {
   return (
     <>
       <TextField
-        // error={isInvalid}
-        // helperText={isInvalid ? "Please enter a valid email address" : ""}
-        // value={email}
-        // onChange={HandleEmailChange}
+        error={isInvalid}
+        helperText={isInvalid ? helperText : ""}
+        value={value}
+        onChange={(event) => {
+          handleChange(event.target.value);
+        }}
         sx={{ mb: 2 }}
         fullWidth
         label={label}
@@ -22,11 +32,11 @@ function InputField({ label, id, type }) {
             borderRadius: 999,
           },
         }}
-        // InputLabelProps={{
-        //   style: {
-        //     color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
-        //   },
-        // }}
+        InputLabelProps={{
+          style: {
+            color: isInvalid ? "#f44336" : "rgba(255, 255, 255, 0.6)",
+          },
+        }}
       />
     </>
   );

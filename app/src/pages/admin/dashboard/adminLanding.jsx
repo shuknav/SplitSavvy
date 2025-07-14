@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import InputField from "../../../components/InputField";
+import ButtonField from "../../../components/ButtonField";
 import { AdminLogin } from "../../../api/admin";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +34,7 @@ function AdminLanding() {
       <main className="flex flex-col items-center justify-center flex-grow px-6 py-16 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Admin Login</h2>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
-          <TextField
+          {/* <TextField
             onChange={HandlePasswordChange}
             value={password}
             fullWidth
@@ -52,10 +54,12 @@ function AdminLanding() {
                 color: "rgba(255, 255, 255, 0.6)",
               },
             }}
-          />
+          /> */}
+          <InputField label="Admin id" id="admin-id" type="text" />
+          <InputField label="Password" id="admin-password" type="password" />
         </Box>
-
-        <Button
+        <ButtonField text="Continue" />
+        {/* <Button
           onClick={HandleButtonClick}
           variant="contained"
           sx={{
@@ -66,7 +70,7 @@ function AdminLanding() {
           }}
         >
           Continue
-        </Button>
+        </Button> */}
       </main>
     </>
   );

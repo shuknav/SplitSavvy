@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-function ButtonField({ text }) {
+function ButtonField({ text, handleClick }) {
   return (
     <>
       <Button
-        // onClick={HandleButtonClick}
+        onClick={handleClick}
         variant="contained"
         sx={{
           textTransform: "none",

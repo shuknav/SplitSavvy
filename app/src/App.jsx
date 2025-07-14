@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Import all the pages components used in routing
 import Landing from "./layouts/landing";
 import Login from "./pages/auth/login";
-import Waitlist from "./pages/waitlist/waitlist";
+import Waitlist from "./pages/Waitlist";
 import WaitlistSuccess from "./pages/waitlist/waitlistSuccess";
 import WaitlistCheck from "./pages/waitlist/waitlistCheckPage";
 import WaitlistStatus from "./pages/waitlist/waitlistStatus";

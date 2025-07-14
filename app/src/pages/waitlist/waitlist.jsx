@@ -62,9 +62,9 @@ function Waitlist() {
           smart, shared dashboard.
         </p>
         <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
-          <InputField label="Email Address" id="email" type="text" />
           <InputField label="First Name" id="fName" type="text" />
           <InputField label="Last Name" id="lName" type="text" />
+          <InputField label="Email Address" id="email" type="text" />
         </Box>
         <ButtonField text="Continue" />
         <p className="text-slate-300 max-w-xl mt-6">
