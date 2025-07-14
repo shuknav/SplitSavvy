@@ -3,7 +3,7 @@ import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
 import { submitToWaitlist } from "../../api/waitlist";
 import { useNavigate } from "react-router-dom";
-import WaitlistForm from "../WaitlistForm";
+import WaitlistForm from "./WaitlistForm";
 
 function Waitlist() {
   const navigate = useNavigate();

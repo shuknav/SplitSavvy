@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import InputField from "../components/InputField";
-import ButtonField from "../components/ButtonField";
+import InputField from "../../components/InputField";
+import ButtonField from "../../components/ButtonField";
 import { useNavigate } from "react-router-dom";
 
 function WaitlistForm({ onSubmit }) {
