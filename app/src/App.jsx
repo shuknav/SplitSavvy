@@ -18,6 +18,7 @@ import PageNotFound from "./pages/pageNotFound";
 import AdminLanding from "./pages/admin/dashboard/adminLanding";
 import AdminDashboard from "./layouts/adminDashboard";
 import AdminAcceptLog from "./pages/admin/logs/adminAcceptLogs";
+import WaitlistMessage from "./pages/WaitlistMessage";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/waitliststatus" element={<WaitlistStatus />} />
           <Route path="/waitlisterror" element={<WaitlistAlready />} />
           <Route path="/waitlistuserexist" element={<WaitlistUser />} />
+          <Route path="/waitlistmessage" element={<WaitlistMessage />} />
           <Route
             path="/waitlistusernotexist"
             element={<WaitlistUserNotExist />}

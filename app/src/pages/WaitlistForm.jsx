@@ -5,6 +5,7 @@ import ButtonField from "../components/ButtonField";
 import { useNavigate } from "react-router-dom";
 
 function WaitlistForm({ onSubmit }) {
+  const navigate = useNavigate();
   const [inputData, setinputData] = useState({
     firstName: "",
     lastName: "",
