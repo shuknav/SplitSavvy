@@ -18,6 +18,11 @@ function LoginForm({ handleVerify, email, passwordfield }) {
     password: false,
   });
 
+  function isValidPassword(password) {
+    //funciton to makesure the user doesnt enter an empty field in password
+    return password.trim() !== "";
+  }
+
   function HandleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
@@ -44,6 +49,15 @@ function LoginForm({ handleVerify, email, passwordfield }) {
     }
     handleVerify(inputData.email);
     // onSubmit(inputData.firstName, inputData.lastName, inputData.email);
+  }
+
+  function HandleButtonClick() {
+    // Function responsible for password validation and login verification
+    if (!isValidPassword(inputData.password)) {
+      setIsInvalid((prev) => ({ ...prev, password: true }));
+      return;
+    }
+    handleVerify(inputData.password);
   }
 
   return (
@@ -100,7 +114,7 @@ function LoginForm({ handleVerify, email, passwordfield }) {
                 }
               />
             </Box>
-            <ButtonField text="Continue" handleClick={HandleButtonClickEmail} />
+            <ButtonField text="Continue" handleClick={HandleButtonClick} />
           </>
         ) : (
           <>

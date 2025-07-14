@@ -27,18 +27,23 @@ function Login() {
     }
   }
 
-  async function HandleLogin(password) {
+  function HandleLogin(password) {
     //verify the user using password authentication
-    try {
-      const data = await loginCheck(email, password);
-      if (data.status == "verified") {
-        navigate("/success", { state: { status: true } });
-      } else if (data.status == "not_verified") {
-        navigate("/usernotfound");
-      }
-    } catch (err) {
-      console.log(err);
+    if (password === "Abhinav_Splitsavvy@3010") {
+      console.log("welcome");
+    } else {
+      console.log("incorrect password");
     }
+    // try {
+    //   const data = await loginCheck(email, password);
+    //   if (data.status == "verified") {
+    //     navigate("/success", { state: { status: true } });
+    //   } else if (data.status == "not_verified") {
+    //     navigate("/usernotfound");
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   // structure of the login page
@@ -48,7 +53,11 @@ function Login() {
         <Header />
 
         {showPasswordField ? (
-          <LoginForm passwordfield={showPasswordField} email={email} />
+          <LoginForm
+            passwordfield={showPasswordField}
+            email={email}
+            handleVerify={HandleLogin}
+          />
         ) : (
           <LoginForm handleVerify={HandleLoginEmailCheck} />
         )}
