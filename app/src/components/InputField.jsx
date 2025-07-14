@@ -9,6 +9,8 @@ function InputField({
   handleChange,
   isInvalid,
   helperText,
+  endAdornment = null,
+  disabled = false,
 }) {
   return (
     <>
@@ -16,6 +18,7 @@ function InputField({
         error={isInvalid}
         helperText={isInvalid ? helperText : ""}
         value={value}
+        disabled={disabled}
         onChange={(event) => {
           handleChange(event.target.value);
         }}
@@ -31,6 +34,7 @@ function InputField({
             color: "white",
             borderRadius: 999,
           },
+          endAdornment: endAdornment,
         }}
         InputLabelProps={{
           style: {
