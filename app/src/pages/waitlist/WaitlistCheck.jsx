@@ -10,12 +10,20 @@ import { useNavigate } from "react-router-dom";
 function WaitlistCheck() {
   const [email, setEmail] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
+  const [helperText, setHelperText] = useState("");
   const navigate = useNavigate();
 
   function HandleEmailChange(val) {
     //function to handle input field changes
     setEmail(val);
     if (isInvalid) setIsInvalid(false);
+  }
+
+  function CheckEmptyEmail(email) {
+    if (email == "") {
+      return true;
+    }
+    return false;
   }
 
   function isValidEmail(email) {
@@ -25,8 +33,14 @@ function WaitlistCheck() {
 
   async function HandleButtonClick() {
     //button responsible for validation and checking the status of the people in waitlist
+    if (CheckEmptyEmail(email)) {
+      setIsInvalid(true);
+      setHelperText("Email can't be empty");
+      return;
+    }
     if (!isValidEmail(email)) {
       setIsInvalid(true);
+      setHelperText("Enter a valid email address");
       return;
     }
 
@@ -76,7 +90,7 @@ function WaitlistCheck() {
             id={"email-id"}
             type={"text"}
             isInvalid={isInvalid}
-            helperText={"Please enter a valid email address"}
+            helperText={helperText}
             value={email}
             handleChange={(val) => {
               HandleEmailChange(val);
