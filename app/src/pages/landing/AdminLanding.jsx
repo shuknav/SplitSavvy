@@ -9,21 +9,70 @@ function AdminLanding() {
     username: "",
     password: "",
   });
+  const [isInvalid, setIsInvalid] = useState({
+    username: false,
+    password: false,
+  });
+  const [helperText, setHelperText] = useState({
+    username: "",
+    password: "",
+  });
+
+  function CheckEmptyUsername(username) {
+    if (username == "") {
+      return true;
+    }
+    return false;
+  }
+
+  function CheckEmptyPassword(password) {
+    if (password == "") {
+      return true;
+    }
+    return false;
+  }
 
   function HandleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
+    if (isInvalid[field]) {
+      setIsInvalid((prev) => ({ ...prev, [field]: false }));
+    }
   }
 
   async function HandleClick() {
+    if (CheckEmptyUsername(inputData.username)) {
+      setIsInvalid((prev) => ({ ...prev, username: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        username: "Username can't be empty",
+      }));
+      return;
+    }
+    if (CheckEmptyPassword(inputData.password)) {
+      setIsInvalid((prev) => ({ ...prev, password: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        password: "Password can't be empty",
+      }));
+      return;
+    }
     try {
       const data = await AdminLogin(inputData.username, inputData.password);
       if (data.result == true && data.message === "welcome") {
         console.log("welcome");
       } else if (data.result == false && data.message === "wrngpass") {
-        console.log("enter correct password");
+        setIsInvalid((prev) => ({ ...prev, password: true }));
+        setHelperText((prev) => ({
+          ...prev,
+          password: "Incorrect password",
+        }));
       } else if (data.result == false && data.message === "notadmin") {
-        console.log("enter correct username");
+        setIsInvalid((prev) => ({ ...prev, username: true }));
+        setHelperText((prev) => ({
+          ...prev,
+          username: "Incorrect username",
+        }));
       }
     } catch (err) {
       console.error("Login failed:", err);
@@ -43,6 +92,8 @@ function AdminLanding() {
             handleChange={(val) => {
               HandleInputChange("username", val);
             }}
+            isInvalid={isInvalid.username}
+            helperText={helperText.username}
           />
           <InputField
             label="Password"
@@ -52,6 +103,8 @@ function AdminLanding() {
             handleChange={(val) => {
               HandleInputChange("password", val);
             }}
+            isInvalid={isInvalid.password}
+            helperText={helperText.password}
           />
         </Box>
         <ButtonField text="Continue" handleClick={HandleClick} />
