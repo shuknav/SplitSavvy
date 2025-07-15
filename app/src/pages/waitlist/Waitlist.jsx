@@ -14,19 +14,19 @@ function Waitlist() {
       const data = await submitToWaitlist(firstName, lastName, email);
       console.log("success", data);
       if (data.status === "user_exists") {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "user",
           },
         });
       } else if (data.status === "already_waitlisted") {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "already",
           },
         });
       } else {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "success",
           },

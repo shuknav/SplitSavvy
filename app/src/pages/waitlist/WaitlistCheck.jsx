@@ -34,19 +34,19 @@ function WaitlistCheck() {
     try {
       const data = await checkInWaitlist(email);
       if (data.status == "user_exists") {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "user",
           },
         });
       } else if (data.status == "not_exists") {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "notfound",
           },
         });
       } else {
-        navigate("/waitlistmessage", {
+        navigate("/message", {
           state: {
             type: "status",
             fullName: data.name,
