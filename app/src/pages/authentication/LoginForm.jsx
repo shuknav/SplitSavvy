@@ -13,6 +13,7 @@ function LoginForm({
   passwordfield,
   passwordError = false,
   passwordHelperText = "Password can't be empty",
+  clearPasswordError,
 }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [inputData, setinputData] = useState({
@@ -34,6 +35,9 @@ function LoginForm({
     setinputData((prev) => ({ ...prev, [field]: value }));
     if (isInvalid[field]) {
       setIsInvalid((prev) => ({ ...prev, [field]: false }));
+    }
+    if (field === "password" && typeof clearPasswordError === "function") {
+      clearPasswordError();
     }
   }
 

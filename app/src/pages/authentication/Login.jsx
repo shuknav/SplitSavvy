@@ -13,6 +13,11 @@ function Login() {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
 
+  function clearPasswordError() {
+    setPasswordError(false);
+    setPasswordHelperText("");
+  }
+
   async function HandleLoginEmailCheck(email) {
     //verifies the email in user table
     try {
@@ -60,6 +65,7 @@ function Login() {
             handleVerify={HandleLogin}
             passwordError={passwordError}
             passwordHelperText={passwordHelperText}
+            clearPasswordError={clearPasswordError}
           />
         ) : (
           <LoginForm handleVerify={HandleLoginEmailCheck} />
