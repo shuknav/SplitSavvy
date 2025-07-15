@@ -7,8 +7,8 @@ function InputField({
   type,
   value,
   handleChange,
-  isInvalid,
-  helperText,
+  isInvalid = false,
+  helperText = "",
   endAdornment = null,
   disabled = false,
 }) {
