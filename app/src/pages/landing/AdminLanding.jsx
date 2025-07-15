@@ -16,14 +16,17 @@ function AdminLanding() {
   }
 
   async function HandleClick() {
-    if (inputData.username === "whisker") {
-      if (inputData.password === "password") {
+    try {
+      const data = await AdminLogin(inputData.username, inputData.password);
+      if (data.result == true && data.message === "welcome") {
         console.log("welcome");
-      } else {
-        console.log("wrong password try again");
+      } else if (data.result == false && data.message === "wrngpass") {
+        console.log("enter correct password");
+      } else if (data.result == false && data.message === "notadmin") {
+        console.log("enter correct username");
       }
-    } else {
-      console.log("not a valid admin");
+    } catch (err) {
+      console.error("Login failed:", err);
     }
   }
 
