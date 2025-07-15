@@ -7,7 +7,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ButtonField from "../../components/ButtonField";
 
-function LoginForm({ handleVerify, email, passwordfield }) {
+function LoginForm({
+  handleVerify,
+  email,
+  passwordfield,
+  passwordError = false,
+  passwordHelperText = "Password can't be empty",
+}) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [inputData, setinputData] = useState({
     email: "",
@@ -99,8 +105,10 @@ function LoginForm({ handleVerify, email, passwordfield }) {
                 handleChange={(val) => {
                   HandleInputChange("password", val);
                 }}
-                isInvalid={isInvalid.password}
-                helperText={"Incorrect password"}
+                isInvalid={isInvalid.password || passwordError}
+                helperText={
+                  passwordError ? passwordHelperText : "Password can't be empty"
+                }
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton

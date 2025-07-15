@@ -10,6 +10,8 @@ function Login() {
   const navigate = useNavigate();
   const [showPasswordField, setShowPasswordField] = useState(false);
   const [email, setEmail] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, setPasswordHelperText] = useState("");
 
   async function HandleLoginEmailCheck(email) {
     //verifies the email in user table
@@ -19,11 +21,11 @@ function Login() {
         setEmail(email);
         setShowPasswordField(true);
       } else if (data.status == "user_not_exist") {
-        // navigate("/message", {
-        //   state: {
-        //     type: "loginNotFound",
-        //   },
-        // });
+        navigate("/message", {
+          state: {
+            type: "loginNotFound",
+          },
+        });
       }
     } catch (err) {
       console.log(err);
@@ -37,11 +39,8 @@ function Login() {
       if (data.result == true) {
         console.log("logged in");
       } else if (data.result == false) {
-        navigate("/message", {
-          state: {
-            type: "loginNotFound",
-          },
-        });
+        setPasswordError(true);
+        setPasswordHelperText("Incorrect password");
       }
     } catch (err) {
       console.log(err);
@@ -59,6 +58,8 @@ function Login() {
             passwordfield={showPasswordField}
             email={email}
             handleVerify={HandleLogin}
+            passwordError={passwordError}
+            passwordHelperText={passwordHelperText}
           />
         ) : (
           <LoginForm handleVerify={HandleLoginEmailCheck} />
