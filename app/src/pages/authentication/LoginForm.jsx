@@ -25,6 +25,15 @@ function LoginForm({
     password: false,
   });
 
+  const [helperText, setHelperText] = useState("");
+
+  function CheckEmptyEmail(email) {
+    if (email == "") {
+      return true;
+    }
+    return false;
+  }
+
   function isValidPassword(password) {
     //funciton to makesure the user doesnt enter an empty field in password
     return password.trim() !== "";
@@ -35,6 +44,7 @@ function LoginForm({
     setinputData((prev) => ({ ...prev, [field]: value }));
     if (isInvalid[field]) {
       setIsInvalid((prev) => ({ ...prev, [field]: false }));
+      setHelperText("");
     }
     if (field === "password" && typeof clearPasswordError === "function") {
       clearPasswordError();
@@ -53,8 +63,16 @@ function LoginForm({
 
   function HandleButtonClickEmail() {
     //button responsible for validating email and adding user to waitlist
+
+    if (CheckEmptyEmail(inputData.email)) {
+      setIsInvalid((prev) => ({ ...prev, email: true }));
+      setHelperText("Email cant be empty");
+      return;
+    }
+
     if (!isValidEmail(inputData.email)) {
       setIsInvalid((prev) => ({ ...prev, email: true }));
+      setHelperText("Enter a valid email");
       return;
     }
     handleVerify(inputData.email);
@@ -89,7 +107,7 @@ function LoginForm({
                   HandleInputChange("email", val);
                 }}
                 isInvalid={isInvalid.email}
-                helperText={"Enter a valid email address"}
+                helperText={helperText}
                 endAdornment={
                   <InputAdornment position="end">
                     <a
@@ -141,7 +159,7 @@ function LoginForm({
                   HandleInputChange("email", val);
                 }}
                 isInvalid={isInvalid.email}
-                helperText={"Enter a valid email address"}
+                helperText={helperText}
               />
             </Box>
             <ButtonField text="Continue" handleClick={HandleButtonClickEmail} />
