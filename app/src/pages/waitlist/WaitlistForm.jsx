@@ -17,6 +17,33 @@ function WaitlistForm({ onSubmit }) {
     email: false,
   });
 
+  const [helperText, setHelperText] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  function CheckEmptyFirstName(firstName) {
+    if (firstName == "") {
+      return true;
+    }
+    return false;
+  }
+
+  function CheckEmptyLastName(lastName) {
+    if (lastName == "") {
+      return true;
+    }
+    return false;
+  }
+
+  function CheckEmptyEmail(email) {
+    if (email == "") {
+      return true;
+    }
+    return false;
+  }
+
   function isValidEmail(email) {
     //function to validate email entered by user
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -50,16 +77,52 @@ function WaitlistForm({ onSubmit }) {
 
   function HandleButtonClick() {
     //button responsible for validating email and adding user to waitlist
+    if (CheckEmptyFirstName(inputData.firstName)) {
+      setIsInvalid((prev) => ({ ...prev, firstName: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        firstName: "First name can't be empty",
+      }));
+      return;
+    }
     if (!isValidFirstName(inputData.firstName)) {
       setIsInvalid((prev) => ({ ...prev, firstName: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        firstName: "Enter a valid first name",
+      }));
+      return;
+    }
+    if (CheckEmptyLastName(inputData.lastName)) {
+      setIsInvalid((prev) => ({ ...prev, lastName: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        lastName: "Last name can't be empty",
+      }));
       return;
     }
     if (!isValidLastName(inputData.lastName)) {
       setIsInvalid((prev) => ({ ...prev, lastName: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        lastName: "Enter a valid last name",
+      }));
+      return;
+    }
+    if (CheckEmptyEmail(inputData.email)) {
+      setIsInvalid((prev) => ({ ...prev, email: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        email: "Email can't be empty",
+      }));
       return;
     }
     if (!isValidEmail(inputData.email)) {
       setIsInvalid((prev) => ({ ...prev, email: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        email: "Enter a valid email",
+      }));
       return;
     }
     onSubmit(inputData.firstName, inputData.lastName, inputData.email);
@@ -70,7 +133,7 @@ function WaitlistForm({ onSubmit }) {
       <Box sx={{ width: "100%", maxWidth: 400 }} className="mb-6">
         <InputField
           isInvalid={isInvalid.firstName}
-          helperText={"first Name can't be empty"}
+          helperText={helperText.firstName}
           handleChange={(val) => {
             HandleInputChange("firstName", val);
           }}
@@ -81,7 +144,7 @@ function WaitlistForm({ onSubmit }) {
         />
         <InputField
           isInvalid={isInvalid.lastName}
-          helperText={"last Name can't be empty"}
+          helperText={helperText.lastName}
           handleChange={(val) => {
             HandleInputChange("lastName", val);
           }}
@@ -92,7 +155,7 @@ function WaitlistForm({ onSubmit }) {
         />
         <InputField
           isInvalid={isInvalid.email}
-          helperText={"incorrect email"}
+          helperText={helperText.email}
           handleChange={(val) => {
             HandleInputChange("email", val);
           }}
