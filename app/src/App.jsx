@@ -7,13 +7,12 @@ import Landing from "./layouts/landing";
 import Login from "./pages/authentication/Login";
 import Waitlist from "./pages/waitlist/Waitlist";
 import WaitlistCheck from "./pages/waitlist/WaitlistCheck";
-import LoginUserNotFound from "./pages/auth/loginUserNotExist";
-import Success from "./pages/success";
-import PageNotFound from "./pages/pageNotFound";
+import WIP from "./pages/misc/WIP";
+import PageNotFound from "./pages/misc/404";
 import AdminLanding from "./pages/admin/dashboard/adminLanding";
 import AdminDashboard from "./layouts/adminDashboard";
 import AdminAcceptLog from "./pages/admin/logs/adminAcceptLogs";
-import Message from "./pages/Message";
+import Message from "./pages/misc/Message";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -26,8 +25,7 @@ function App() {
           <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/waitlistcheck" element={<WaitlistCheck />} />
           <Route path="/message" element={<Message />} />
-          <Route path="/usernotfound" element={<LoginUserNotFound />} />
-          <Route path="/success" element={<Success />} />
+          <Route path="/wip" element={<WIP />} />
           <Route path="/admin" element={<AdminLanding />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/adminstats" element={<AdminAcceptLog />} />

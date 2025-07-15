@@ -1,5 +1,5 @@
 import React from "react";
-import img_pageNotFound from "../assets/img_pageNotFound.png";
+import img_pageNotFound from "../../assets/img_pageNotFound.png";
 
 function PageNotFound() {
   // 404 page

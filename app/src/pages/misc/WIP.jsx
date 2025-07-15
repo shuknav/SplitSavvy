@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import img_building from "../assets/img_building.png";
+import img_building from "../../assets/img_building.png";
 import { useLocation } from "react-router-dom";
 
-function Success() {
+function WIP() {
   const { state } = useLocation();
   const { status } = state || {};
   const navigate = useNavigate();
@@ -25,4 +25,4 @@ function Success() {
   );
 }
 
-export default Success;
+export default WIP;

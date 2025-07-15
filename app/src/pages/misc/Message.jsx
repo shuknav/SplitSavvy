@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
 import { useLocation } from "react-router-dom";
-import Messages from "./MessageTexts";
+import Messages from "../MessageTexts";
 
 function Message() {
   const { state } = useLocation();
