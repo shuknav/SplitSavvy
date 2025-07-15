@@ -61,6 +61,22 @@ const waitlistMessages = {
       "Here’s your current waitlist status. We’ll notify you as soon as you move forward in the queue.",
     ],
   },
+  loginNotFound: {
+    heading: "Oops! You’re not on the list.",
+    paragraphs: [
+      "SplitSavvy is currently invite-only. You’ll need to join the waitlist before you can log in.",
+      {
+        text: "Entered the wrong email address?",
+        href: "/login",
+        linkText: "Go back and try again",
+      },
+      {
+        text: "Think we made a mistake?",
+        href: "mailto:support@splitsavvy.in",
+        linkText: "Contact us",
+      },
+    ],
+  },
 };
 
 export default waitlistMessages;

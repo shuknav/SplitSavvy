@@ -13,7 +13,7 @@ import PageNotFound from "./pages/pageNotFound";
 import AdminLanding from "./pages/admin/dashboard/adminLanding";
 import AdminDashboard from "./layouts/adminDashboard";
 import AdminAcceptLog from "./pages/admin/logs/adminAcceptLogs";
-import WaitlistMessage from "./pages/waitlist/WaitlistMessage";
+import Message from "./pages/Message";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/waitlist" element={<Waitlist />} />
           <Route path="/waitlistcheck" element={<WaitlistCheck />} />
-          <Route path="/waitlistmessage" element={<WaitlistMessage />} />
+          <Route path="/message" element={<Message />} />
           <Route path="/usernotfound" element={<LoginUserNotFound />} />
           <Route path="/success" element={<Success />} />
           <Route path="/admin" element={<AdminLanding />} />

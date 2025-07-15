@@ -19,8 +19,11 @@ function Login() {
         setEmail(email);
         setShowPasswordField(true);
       } else if (data.status == "user_not_exist") {
-        // navigate("/usernotfound");
-        console.log("no user");
+        // navigate("/message", {
+        //   state: {
+        //     type: "loginNotFound",
+        //   },
+        // });
       }
     } catch (err) {
       console.log(err);
@@ -34,7 +37,11 @@ function Login() {
       if (data.result == true) {
         console.log("logged in");
       } else if (data.result == false) {
-        console.log("enter correct password");
+        navigate("/message", {
+          state: {
+            type: "loginNotFound",
+          },
+        });
       }
     } catch (err) {
       console.log(err);

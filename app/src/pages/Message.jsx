@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "../../components/Header/header";
-import Footer from "../../components/Footer/footer";
+import Header from "../components/Header/header";
+import Footer from "../components/Footer/footer";
 import { useLocation } from "react-router-dom";
-import waitlistMessages from "../../constants/waitlistMessages";
+import Messages from "./MessageTexts";
 
-function WaitlistMessage() {
+function Message() {
   const { state } = useLocation();
   const { type = "success", fullName = "", status = "" } = state || {};
-  const content = waitlistMessages[type];
+  const content = Messages[type];
 
   const getStatusColor = () => {
     if (type !== "status") return "";
@@ -59,4 +59,4 @@ function WaitlistMessage() {
   );
 }
 
-export default WaitlistMessage;
+export default Message;
