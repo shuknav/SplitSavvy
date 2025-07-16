@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
@@ -12,6 +12,13 @@ function Login() {
   const [email, setEmail] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("token");
+    if (isLoggedIn) {
+      navigate("/welcomelogin");
+    }
+  }, []);
 
   function clearPasswordError() {
     setPasswordError(false);
@@ -43,7 +50,8 @@ function Login() {
       const data = await loginVerify(email, password);
       if (data.result == true) {
         localStorage.setItem("token", data.token);
-        console.log("logged in");
+        // console.log("logged in");
+        navigate("/welcomelogin");
       } else if (data.result == false) {
         setPasswordError(true);
         setPasswordHelperText("Incorrect password");
