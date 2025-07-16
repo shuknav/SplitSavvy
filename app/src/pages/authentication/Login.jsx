@@ -42,6 +42,7 @@ function Login() {
     try {
       const data = await loginVerify(email, password);
       if (data.result == true) {
+        localStorage.setItem("token", data.token);
         console.log("logged in");
       } else if (data.result == false) {
         setPasswordError(true);
