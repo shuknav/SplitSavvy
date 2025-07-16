@@ -2,11 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
-import { AdminLogin } from "../../api/admin";
+import { AdminLogin, TokenVerify } from "../../api/admin";
 import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      const isToken = sessionStorage.getItem("token");
+      if (isToken) {
+        const data = await TokenVerify(isToken);
+        if (data.result === "Verified") {
+          navigate("/welcomeadmin");
+        }
+      }
+    };
+    verifyToken();
+  }, []);
 
   const [inputData, setinputData] = useState({
     username: "",
