@@ -13,18 +13,18 @@ function Login() {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
 
-  useEffect(() => {
-    const verifyToken = async () => {
-      const isToken = localStorage.getItem("token");
-      if (isToken) {
-        const data = await TokenVerify(isToken);
-        if (data.result === "Verified") {
-          navigate("/welcomelogin");
-        }
-      }
-    };
-    verifyToken();
-  }, []);
+  // useEffect(() => {
+  //   const verifyToken = async () => {
+  //     const isToken = localStorage.getItem("token");
+  //     if (isToken) {
+  //       const data = await TokenVerify(isToken);
+  //       if (data.result === "Verified") {
+  //         navigate("/welcomelogin");
+  //       }
+  //     }
+  //   };
+  //   verifyToken();
+  // }, []);
 
   function clearPasswordError() {
     setPasswordError(false);
@@ -56,8 +56,7 @@ function Login() {
       const data = await loginVerify(email, password);
       if (data.result == true) {
         localStorage.setItem("token", data.token);
-        // console.log("logged in");
-        navigate("/welcomelogin");
+        console.log("logged in");
       } else if (data.result == false) {
         setPasswordError(true);
         setPasswordHelperText("Incorrect password");
