@@ -3,8 +3,11 @@ import { Box } from "@mui/material";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
 import { AdminLogin } from "../../api/admin";
+import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {
+  const navigate = useNavigate();
+
   const [inputData, setinputData] = useState({
     username: "",
     password: "",
@@ -61,7 +64,7 @@ function AdminLanding() {
       const data = await AdminLogin(inputData.username, inputData.password);
       if (data.result == true && data.message === "welcome") {
         sessionStorage.setItem("token", data.token);
-        console.log("welcome");
+        navigate("/welcomeadmin");
       } else if (data.result == false && data.message === "wrngpass") {
         setIsInvalid((prev) => ({ ...prev, password: true }));
         setHelperText((prev) => ({
