@@ -23,3 +23,16 @@ export async function loginVerify(email, password) {
     throw err.response?.data || { error: "Something went wrong" };
   }
 }
+
+export async function TokenVerify(token) {
+  try {
+    const res = await axios.get(`${baseURL}/auth/tokenverify`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}

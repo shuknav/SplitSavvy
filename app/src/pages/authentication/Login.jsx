@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
-import { loginEmailCheck, loginVerify } from "../../api/auth";
+import { loginEmailCheck, loginVerify, TokenVerify } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -14,10 +14,16 @@ function Login() {
   const [passwordHelperText, setPasswordHelperText] = useState("");
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("token");
-    if (isLoggedIn) {
-      navigate("/welcomelogin");
-    }
+    const verifyToken = async () => {
+      const isToken = localStorage.getItem("token");
+      if (isToken) {
+        const data = await TokenVerify(isToken);
+        if (data.result === "Verified") {
+          navigate("/welcomelogin");
+        }
+      }
+    };
+    verifyToken();
   }, []);
 
   function clearPasswordError() {

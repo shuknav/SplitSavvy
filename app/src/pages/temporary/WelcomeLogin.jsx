@@ -1,14 +1,27 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TokenVerify } from "../../api/auth";
 
 function WelcomeLogin() {
   const navigate = useNavigate();
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("token");
-    if (!isLoggedIn) {
-      navigate("/login");
-    }
+    const verifyToken = async () => {
+      const isToken = localStorage.getItem("token");
+      if (isToken) {
+        const data = await TokenVerify(isToken);
+        if (
+          data.result === "No token" ||
+          data.result === "Invalid or expired token"
+        ) {
+          navigate("/login");
+        }
+      }
+      if (!isToken) {
+        navigate("/login");
+      }
+    };
+    verifyToken();
   }, []);
 
   return (
