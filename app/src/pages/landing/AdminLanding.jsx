@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
@@ -60,6 +60,7 @@ function AdminLanding() {
     try {
       const data = await AdminLogin(inputData.username, inputData.password);
       if (data.result == true && data.message === "welcome") {
+        sessionStorage.setItem("token", data.token);
         console.log("welcome");
       } else if (data.result == false && data.message === "wrngpass") {
         setIsInvalid((prev) => ({ ...prev, password: true }));
