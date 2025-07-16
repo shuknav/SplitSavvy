@@ -11,7 +11,6 @@ import WIP from "./pages/misc/WIP";
 import PageNotFound from "./pages/misc/404";
 import AdminLanding from "./pages/landing/AdminLanding";
 import Message from "./pages/misc/Message";
-import WelcomeAdmin from "./pages/temporary/WelcomeAdmin";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -26,7 +25,6 @@ function App() {
           <Route path="/message" element={<Message />} />
           <Route path="/wip" element={<WIP />} />
           <Route path="/admin" element={<AdminLanding />} />
-          <Route path="/welcomeadmin" element={<WelcomeAdmin />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
