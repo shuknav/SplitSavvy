@@ -56,7 +56,7 @@ function Login() {
       const data = await loginVerify(email, password);
       if (data.result == true) {
         localStorage.setItem("User Token", data.token);
-        navigate("/dashboard");
+        navigate("/user");
       } else if (data.result == false) {
         setPasswordError(true);
         setPasswordHelperText("Incorrect password");

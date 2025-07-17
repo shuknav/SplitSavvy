@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TokenVerify } from "../../api/auth";
 
-function UserDashboard() {
+function User() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,4 +38,4 @@ function UserDashboard() {
   );
 }
 
-export default UserDashboard;
+export default User;
