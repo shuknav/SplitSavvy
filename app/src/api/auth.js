@@ -36,3 +36,16 @@ export async function TokenVerify(token) {
     console.log(err);
   }
 }
+
+export async function UserDetails(token) {
+  try {
+    const res = await axios.get(`${baseURL}/auth/userdetails`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
