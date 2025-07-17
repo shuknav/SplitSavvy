@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "./components/InputField";
 import ButtonField from "./components/ButtonField";
+import { PassChange } from "./api/auth";
 
 function PassChange() {
   const [inputData, setinputData] = useState({
@@ -16,7 +17,9 @@ function PassChange() {
   }
 
   function HandleButtonClick() {
-    console.log("changed");
+    if (inputData.newPass === inputData.cNewPass) {
+      PassChange(inputData.oldPass, inputData.cNewPass);
+    }
   }
 
   return (

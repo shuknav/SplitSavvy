@@ -49,3 +49,15 @@ export async function UserDetails(token) {
     console.log(err);
   }
 }
+
+export async function PassChange(oldPass, cNewPass) {
+  try {
+    const res = await axios.post(`${baseURL}/auth/passchange`, {
+      oldPass,
+      cNewPass,
+    });
+    return res.data;
+  } catch (err) {
+    throw err.response?.data || { error: "Something went wrong" };
+  }
+}
