@@ -12,6 +12,7 @@ import PageNotFound from "./pages/misc/404";
 import AdminLanding from "./pages/landing/AdminLanding";
 import Message from "./pages/misc/Message";
 import User from "./pages/user/User";
+import PassChange from "./PasswordUpdateUserTemp";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/wip" element={<WIP />} />
           <Route path="/admin" element={<AdminLanding />} />
           <Route path="/user" element={<User />} />
+          <Route path="/pass" element={<PassChange />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
