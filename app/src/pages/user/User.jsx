@@ -36,7 +36,10 @@ function User() {
 
   return (
     <>
-      <h1>Hello</h1>
+      <h1>
+        welcome, {sessionStorage.getItem("First Name")}{" "}
+        {sessionStorage.getItem("Last Name")}
+      </h1>
       <button onClick={HandleClick}>log out</button>
     </>
   );
