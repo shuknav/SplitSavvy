@@ -1,7 +1,14 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
-function ButtonField({ text, handleClick }) {
+function ButtonField({
+  text,
+  handleClick,
+  disabled = false,
+  endIcon = null,
+  loading = false,
+}) {
   return (
     <>
       <Button
@@ -13,8 +20,12 @@ function ButtonField({ text, handleClick }) {
           paddingX: 4,
           paddingY: 1.5,
         }}
+        disabled={disabled || loading}
+        endIcon={
+          loading ? <CircularProgress size={24} color="secondary" /> : endIcon
+        }
       >
-        {text}
+        {loading ? "loading..." : text}
       </Button>
     </>
   );

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function WaitlistForm({ onSubmit }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputData, setinputData] = useState({
     firstName: "",
     lastName: "",
@@ -75,7 +76,7 @@ function WaitlistForm({ onSubmit }) {
     }
   }
 
-  function HandleButtonClick() {
+  async function HandleButtonClick() {
     //button responsible for validating email and adding user to waitlist
     if (CheckEmptyFirstName(inputData.firstName)) {
       setIsInvalid((prev) => ({ ...prev, firstName: true }));
@@ -125,7 +126,9 @@ function WaitlistForm({ onSubmit }) {
       }));
       return;
     }
-    onSubmit(inputData.firstName, inputData.lastName, inputData.email);
+    setLoading(true);
+    await onSubmit(inputData.firstName, inputData.lastName, inputData.email);
+    setLoading(false);
   }
 
   return (
@@ -165,7 +168,11 @@ function WaitlistForm({ onSubmit }) {
           value={inputData.email}
         />
       </Box>
-      <ButtonField text="Continue" handleClick={HandleButtonClick} />
+      <ButtonField
+        text="Continue"
+        handleClick={HandleButtonClick}
+        loading={loading}
+      />
       <p className="text-slate-300 max-w-xl mt-6">
         Already applied?{" "}
         <a
