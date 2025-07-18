@@ -50,7 +50,7 @@ export async function UserDetails(token) {
   }
 }
 
-export async function PassChange(oldPass, cNewPass) {
+export async function PassChangeResolver(oldPass, cNewPass) {
   try {
     const res = await axios.post(`${baseURL}/auth/passchange`, {
       oldPass,

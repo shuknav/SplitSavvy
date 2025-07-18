@@ -19,7 +19,7 @@ function Login() {
       if (isToken) {
         const data = await TokenVerify(isToken);
         if (data.result === "Verified") {
-          navigate("/welcomelogin");
+          navigate("/user");
         }
       }
     };
