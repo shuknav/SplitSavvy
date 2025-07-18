@@ -4,6 +4,8 @@ const waitlistMessages = {
     paragraphs: [
       "We’ll notify you as soon as your invite is ready. In the meantime, sit back and relax — smarter shared living is just around the corner.",
       "🕒 We review all waitlist requests every Monday, so you can expect an update within a week.",
+      "📩 A confirmation email has been sent to your registered email address. You’ll also receive your final waitlist decision there.",
+      "📬 Please keep an eye on your inbox — and don’t forget to check your junk or spam folder too!",
       {
         text: "🔍 Want to track your status?",
         linkText: "Click here",
