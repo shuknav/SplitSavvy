@@ -25,4 +25,4 @@ More features and improvements coming soon.
 ---
 
 🧠 Part of the full-stack SplitSavvy project.  
-🔗 Backend: [SplitSavvy Backend Repo](https://github.com/shuknav/SplitSavvy-backend)
+🔗 Backend: [SplitSavvy Backend Repo](https://github.com/shuknav/SplitSavvyBackend)
