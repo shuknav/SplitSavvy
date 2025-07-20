@@ -26,3 +26,15 @@ export async function TokenVerify(token) {
     console.log(err);
   }
 }
+
+export async function PasswordUpdate(oldPassword, newPassword) {
+  try {
+    const res = await axios.post(`${baseURL}/admin/passwordupdate`, {
+      oldPassword,
+      newPassword,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
