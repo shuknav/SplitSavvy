@@ -39,11 +39,12 @@ export async function PasswordUpdate(oldPassword, newPassword) {
   }
 }
 
-export async function AdminAdd(username, password) {
+export async function AdminAdd(username, password, sudo) {
   try {
     const res = await axios.post(`${baseURL}/admin/add`, {
       username,
       password,
+      sudo,
     });
     return res.data;
   } catch (err) {

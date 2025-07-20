@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { AdminAdd } from "../../../api/admin";
 
 function CreateAdmin() {
@@ -10,14 +12,30 @@ function CreateAdmin() {
     password: "",
   });
 
+  const [username, setUsername] = useState("");
+
+  const [sudo, setSudo] = useState(false);
+
+  function HandleSwitch() {
+    setSudo(!sudo);
+  }
+
+  function HandleUsernameChange(val) {
+    setUsername(val);
+  }
+
   function HandleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
   }
 
   async function HandleButtonClick() {
-    const res = await AdminAdd(inputData.username, inputData.password);
+    const res = await AdminAdd(inputData.username, inputData.password, sudo);
     console.log(res);
+  }
+
+  async function HandleSudoButtonClick() {
+    console.log(username);
   }
 
   return (
@@ -46,7 +64,28 @@ function CreateAdmin() {
           // helperText={helperText}
         />
       </Box>
+      <FormControlLabel
+        control={<Switch onChange={HandleSwitch} />}
+        label="Sudo"
+      />
       <ButtonField text="Continue" handleClick={HandleButtonClick} />
+      <Box>
+        <InputField
+          label="username"
+          id="user"
+          type="text"
+          value={username}
+          handleChange={(val) => {
+            HandleUsernameChange(val);
+          }}
+          // isInvalid={isInvalid.email}
+          // helperText={helperText}
+        />
+      </Box>
+      <ButtonField
+        text="Toggle sudo status"
+        handleClick={HandleSudoButtonClick}
+      />
     </>
   );
 }
