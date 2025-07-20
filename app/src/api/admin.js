@@ -38,3 +38,15 @@ export async function PasswordUpdate(oldPassword, newPassword) {
     console.log(err);
   }
 }
+
+export async function AdminAdd(username, password) {
+  try {
+    const res = await axios.post(`${baseURL}/admin/add`, {
+      username,
+      password,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
