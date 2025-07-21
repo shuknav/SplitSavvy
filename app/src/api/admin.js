@@ -51,3 +51,24 @@ export async function AdminAdd(username, password, sudo) {
     console.log(err);
   }
 }
+
+export async function FetchAdminList() {
+  try {
+    const res = await axios.post(`${baseURL}/admin/list`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function SudoPermissionsUpdate(username, sudo) {
+  try {
+    const res = await axios.post(`${baseURL}/admin/sudopermissions`, {
+      username,
+      sudo,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
