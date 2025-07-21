@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
-import SudoPermissions from "./SudoPermissions";
+import SuperUserPermissions from "./SuperUserPermissions";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { AdminAdd } from "../../../api/admin";
@@ -15,14 +15,10 @@ function CreateAdmin() {
 
   const [username, setUsername] = useState("");
 
-  const [sudo, setSudo] = useState(false);
+  const [superUser, setSuperUser] = useState(false);
 
   function HandleSwitch() {
-    setSudo(!sudo);
-  }
-
-  function HandleUsernameChange(val) {
-    setUsername(val);
+    setSuperUser(!superUser);
   }
 
   function HandleInputChange(field, value) {
@@ -31,12 +27,12 @@ function CreateAdmin() {
   }
 
   async function HandleButtonClick() {
-    const res = await AdminAdd(inputData.username, inputData.password, sudo);
+    const res = await AdminAdd(
+      inputData.username,
+      inputData.password,
+      superUser
+    );
     console.log(res);
-  }
-
-  async function HandleSudoButtonClick() {
-    console.log(username);
   }
 
   return (
@@ -67,27 +63,10 @@ function CreateAdmin() {
       </Box>
       <FormControlLabel
         control={<Switch onChange={HandleSwitch} />}
-        label="Sudo"
+        label="Super User"
       />
       <ButtonField text="Continue" handleClick={HandleButtonClick} />
-      <Box>
-        <InputField
-          label="username"
-          id="user"
-          type="text"
-          value={username}
-          handleChange={(val) => {
-            HandleUsernameChange(val);
-          }}
-          // isInvalid={isInvalid.email}
-          // helperText={helperText}
-        />
-      </Box>
-      <ButtonField
-        text="Toggle sudo status"
-        handleClick={HandleSudoButtonClick}
-      />
-      <SudoPermissions />
+      <SuperUserPermissions />
     </>
   );
 }

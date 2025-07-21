@@ -39,12 +39,12 @@ export async function PasswordUpdate(oldPassword, newPassword) {
   }
 }
 
-export async function AdminAdd(username, password, sudo) {
+export async function AdminAdd(username, password, superUser) {
   try {
     const res = await axios.post(`${baseURL}/admin/add`, {
       username,
       password,
-      sudo,
+      superUser,
     });
     return res.data;
   } catch (err) {
@@ -61,11 +61,11 @@ export async function FetchAdminList() {
   }
 }
 
-export async function SudoPermissionsUpdate(username, sudo) {
+export async function SuperUserPermissionsUpdate(username, superUser) {
   try {
-    const res = await axios.post(`${baseURL}/admin/sudopermissions`, {
+    const res = await axios.post(`${baseURL}/admin/superuserpermissions`, {
       username,
-      sudo,
+      superUser,
     });
     return res.data;
   } catch (err) {

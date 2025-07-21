@@ -7,10 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
+import Tooltip from "@mui/material/Tooltip";
 import { FetchAdminList } from "../../../api/admin";
-import { SudoPermissionsUpdate } from "../../../api/admin";
+import { SuperUserPermissionsUpdate } from "../../../api/admin";
 
-function SudoPermissions() {
+function SuperUserPermissions() {
   const [adminList, setAdminList] = useState([]);
   const [update, setUpdate] = useState(false);
 
@@ -22,10 +23,10 @@ function SudoPermissions() {
     fetchAdminList();
   }, [update]);
 
-  async function HandleSudo(username) {
+  async function HandleSuperUser(username) {
     const admin = adminList.find((admin) => admin.username === username);
     if (admin) {
-      const res = await SudoPermissionsUpdate(username, !admin.sudo);
+      const res = await SuperUserPermissionsUpdate(username, !admin.super_user);
       if (res.result == "success") {
         setUpdate((prev) => !prev);
       }
@@ -47,17 +48,25 @@ function SudoPermissions() {
           <TableBody>
             {adminList.map((admin) => (
               <TableRow
-                key={admin.name}
+                key={admin.admin_id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell>{admin.username}</TableCell>
                 <TableCell>
-                  <Checkbox
-                    checked={admin.sudo}
-                    onChange={() => {
-                      HandleSudo(admin.username);
-                    }}
-                  />
+                  {admin.super_admin ? (
+                    <Tooltip title="Super Admin permissions can not be revoked">
+                      <span>
+                        <Checkbox disabled checked={admin.super_user} />
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    <Checkbox
+                      checked={admin.super_user}
+                      onChange={() => {
+                        HandleSuperUser(admin.username);
+                      }}
+                    />
+                  )}
                 </TableCell>
               </TableRow>
             ))}
@@ -68,4 +77,4 @@ function SudoPermissions() {
   );
 }
 
-export default SudoPermissions;
+export default SuperUserPermissions;
