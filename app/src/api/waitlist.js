@@ -24,3 +24,34 @@ export async function checkInWaitlist(email) {
     throw err.response?.data || { error: "Something went wrong" };
   }
 }
+
+export async function fetchWaitlistData() {
+  try {
+    const res = await axios.post(`${baseURL}/waitlist/list`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function ApproveWaitlist(email) {
+  try {
+    const res = await axios.post(`${baseURL}/waitlist/approve`, {
+      email,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function RejectWaitlist(email) {
+  try {
+    const res = await axios.post(`${baseURL}/waitlist/reject`, {
+      email,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
