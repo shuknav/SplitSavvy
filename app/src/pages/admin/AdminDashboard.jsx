@@ -10,11 +10,19 @@ function AdminDashboard() {
     navigate("/admin");
   }
 
+  function HandleSettings() {
+    navigate("/admin/settings");
+  }
+
+  function HandleRequests() {
+    navigate("/admin/managerequest");
+  }
+
   return (
     <>
       <ButtonField text={"logout"} handleClick={HandleLogout} />
-      <ButtonField />
-      <ButtonField />
+      <ButtonField text={"Settings"} handleClick={HandleSettings} />
+      <ButtonField text={"Pending Requests"} handleClick={HandleRequests} />
     </>
   );
 }
