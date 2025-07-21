@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
-import Header from "../../components/Header/headerLanding";
-import Footer from "../../components/Footer/footerLanding";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { checkInWaitlist } from "../../api/waitlist";
 import { useNavigate } from "react-router-dom";
 

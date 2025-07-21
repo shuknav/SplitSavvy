@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
-import Header from "../../components/Header/header";
-import Footer from "../../components/Footer/footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { loginEmailCheck, loginVerify, TokenVerify } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 

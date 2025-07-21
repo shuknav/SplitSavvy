@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
-import { AdminLogin, TokenVerify } from "../../api/admin";
+import { AdminLogin } from "../../api/admin";
 import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {
