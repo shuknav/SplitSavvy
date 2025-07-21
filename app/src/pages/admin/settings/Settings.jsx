@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Tooltip from "@mui/material/Tooltip";
 import PasswordChange from "./PasswordChange";
 import CreateAdmin from "./CreateAdmin";
 import SuperUserPermissions from "./SuperUserPermissions";
+import { superUser } from "../../../api/admin";
 
 function Settings() {
   const [value, setValue] = useState("1");
+  const [isSuperUser, setIsSuperUser] = useState(false);
 
   const handleChange = (event, value) => {
     setValue(value);
   };
+
+  useEffect(() => {
+    const verifySuperUser = async () => {
+      const res = await superUser(sessionStorage.getItem("Admin Token"));
+      setIsSuperUser(res.result);
+    };
+    verifySuperUser();
+  }, []);
 
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
@@ -21,8 +32,27 @@ function Settings() {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="Password update" value="1" />
-            <Tab label="Create a new admin" value="2" />
-            <Tab label="Super user permissions" value="3" />
+            {isSuperUser ? (
+              <>
+                <Tab label="Create a new admin" value="2" />
+                <Tab label="Super user permissions" value="3" />
+              </>
+            ) : (
+              <Tooltip title="Only super user can access this">
+                <span>
+                  <Tab
+                    label="Create a new admin"
+                    value="2"
+                    disabled={!isSuperUser}
+                  />
+                  <Tab
+                    label="Super user permissions"
+                    value="3"
+                    disabled={!isSuperUser}
+                  />
+                </span>
+              </Tooltip>
+            )}
           </TabList>
         </Box>
         <TabPanel value="1">

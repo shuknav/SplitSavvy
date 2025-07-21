@@ -73,3 +73,14 @@ export async function SuperUserPermissionsUpdate(username, superUser) {
     console.log(err);
   }
 }
+
+export async function superUser(token) {
+  try {
+    const res = await axios.post(`${baseURL}/admin/issuperuser`, {
+      token,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
