@@ -11,8 +11,14 @@ function CreateAdmin() {
     username: "",
     password: "",
   });
-
-  const [username, setUsername] = useState("");
+  const [isInvalid, setIsInvalid] = useState({
+    username: false,
+    password: false,
+  });
+  const [helperText, setHelperText] = useState({
+    username: "",
+    password: "",
+  });
 
   const [superUser, setSuperUser] = useState(false);
 
@@ -23,15 +29,51 @@ function CreateAdmin() {
   function HandleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
+    if (isInvalid[field]) {
+      setIsInvalid((prev) => ({ ...prev, [field]: false }));
+      setHelperText((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
+  }
+
+  function IsFieldEmpty(data) {
+    if (data === "") {
+      return true;
+    }
+    return false;
   }
 
   async function HandleButtonClick() {
+    if (IsFieldEmpty(inputData.username)) {
+      setIsInvalid((prev) => ({ ...prev, username: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        username: "Username can't be empty",
+      }));
+      return;
+    }
+    if (IsFieldEmpty(inputData.password)) {
+      setIsInvalid((prev) => ({ ...prev, password: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        password: "Username can't be empty",
+      }));
+      return;
+    }
     const res = await AdminAdd(
       inputData.username,
       inputData.password,
       superUser
     );
-    console.log(res);
+    if (res.result === "notavailable") {
+      setIsInvalid((prev) => ({ ...prev, username: true }));
+      setHelperText((prev) => ({
+        ...prev,
+        username: "Username not available",
+      }));
+    }
   }
 
   return (
@@ -45,8 +87,8 @@ function CreateAdmin() {
           handleChange={(val) => {
             HandleInputChange("username", val);
           }}
-          // isInvalid={isInvalid.email}
-          // helperText={helperText}
+          isInvalid={isInvalid.username}
+          helperText={helperText.username}
         />
         <InputField
           label="Password"
@@ -56,8 +98,8 @@ function CreateAdmin() {
           handleChange={(val) => {
             HandleInputChange("password", val);
           }}
-          // isInvalid={isInvalid.email}
-          // helperText={helperText}
+          isInvalid={isInvalid.password}
+          helperText={helperText.password}
         />
       </Box>
       <FormControlLabel
