@@ -1,10 +1,8 @@
 import React from "react";
-import PasswordChange from "./settings/PasswordChange";
-import CreateAdmin from "./settings/CreateAdmin";
-import SuperUserPermissions from "./settings/SuperUserPermissions";
+import Settings from "./settings/Settings";
 
 function AdminDashboard() {
-  return;
+  return <Settings></Settings>;
 }
 
 export default AdminDashboard;
