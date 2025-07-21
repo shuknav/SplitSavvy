@@ -8,7 +8,7 @@ function RequireAdminAuth({ children }) {
 
   useEffect(() => {
     const verifyToken = async () => {
-      const token = sessionStorage.getItem("User Token");
+      const token = sessionStorage.getItem("Admin Token");
       if (!token) {
         navigate("/admin");
         return;

@@ -81,7 +81,8 @@ function PasswordChange() {
       if (inputData.newPassword === inputData.confirmNewPassword) {
         const res = await PasswordUpdate(
           inputData.oldPassword,
-          inputData.confirmNewPassword
+          inputData.confirmNewPassword,
+          sessionStorage.getItem("Admin Token")
         );
         if (res.result === "wrngpassword") {
           setIsInvalid((prev) => ({

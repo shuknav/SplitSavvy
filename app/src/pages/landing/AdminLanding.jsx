@@ -8,18 +8,15 @@ import { useNavigate } from "react-router-dom";
 function AdminLanding() {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const verifyToken = async () => {
-  //     const isToken = sessionStorage.getItem("token");
-  //     if (isToken) {
-  //       const data = await TokenVerify(isToken);
-  //       if (data.result === "Verified") {
-  //         navigate("/welcomeadmin");
-  //       }
-  //     }
-  //   };
-  //   verifyToken();
-  // }, []);
+  useEffect(() => {
+    const verifyToken = async () => {
+      const isToken = sessionStorage.getItem("Admin Token");
+      if (isToken) {
+        navigate("/admin/dashboard");
+      }
+    };
+    verifyToken();
+  }, []);
 
   const [inputData, setinputData] = useState({
     username: "",
@@ -76,9 +73,8 @@ function AdminLanding() {
     try {
       const data = await AdminLogin(inputData.username, inputData.password);
       if (data.result == true && data.message === "welcome") {
-        sessionStorage.setItem("User Token", data.token);
+        sessionStorage.setItem("Admin Token", data.token);
         navigate("/admin/dashboard");
-        console.log("welcome");
       } else if (data.result == false && data.message === "wrngpass") {
         setIsInvalid((prev) => ({ ...prev, password: true }));
         setHelperText((prev) => ({

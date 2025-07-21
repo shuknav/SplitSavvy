@@ -27,11 +27,12 @@ export async function TokenVerify(token) {
   }
 }
 
-export async function PasswordUpdate(oldPassword, newPassword) {
+export async function PasswordUpdate(oldPassword, newPassword, token) {
   try {
     const res = await axios.post(`${baseURL}/admin/passwordupdate`, {
       oldPassword,
       newPassword,
+      token,
     });
     return res.data;
   } catch (err) {
