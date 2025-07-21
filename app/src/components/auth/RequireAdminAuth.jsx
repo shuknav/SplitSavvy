@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TokenVerify } from "../../api/admin";
 
-function RequireAdminAuth({ Children }) {
+function RequireAdminAuth({ children }) {
   const navigate = useNavigate();
   const [Verified, setVerified] = useState(false);
 
@@ -29,7 +29,7 @@ function RequireAdminAuth({ Children }) {
     verifyToken();
   }, [navigate]);
 
-  return Verified ? <>{Children}</> : null;
+  return Verified ? <>{children}</> : null;
 }
 
 export default RequireAdminAuth;

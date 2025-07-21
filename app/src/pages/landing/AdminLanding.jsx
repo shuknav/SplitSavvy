@@ -77,7 +77,7 @@ function AdminLanding() {
       const data = await AdminLogin(inputData.username, inputData.password);
       if (data.result == true && data.message === "welcome") {
         sessionStorage.setItem("User Token", data.token);
-        // navigate("/welcomeadmin");
+        navigate("/admin/dashboard");
         console.log("welcome");
       } else if (data.result == false && data.message === "wrngpass") {
         setIsInvalid((prev) => ({ ...prev, password: true }));
