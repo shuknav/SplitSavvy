@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
-import SuperUserPermissions from "./SuperUserPermissions";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { AdminAdd } from "../../../api/admin";
@@ -66,7 +65,6 @@ function CreateAdmin() {
         label="Super User"
       />
       <ButtonField text="Continue" handleClick={HandleButtonClick} />
-      <SuperUserPermissions />
     </>
   );
 }
