@@ -88,6 +88,10 @@ function LoginForm({
     handleVerify(inputData.password);
   }
 
+  function handleForgotPassword() {
+    console.log(inputData.email);
+  }
+
   return (
     <>
       <main className="flex flex-col items-center justify-center flex-grow px-6 py-16 text-center">
@@ -144,6 +148,14 @@ function LoginForm({
                 }
               />
             </Box>
+            <a
+              role="button"
+              tabIndex="0"
+              onClick={handleForgotPassword}
+              className="underline text-blue-400 hover:text-blue-500 mb-2 cursor-pointer"
+            >
+              Forgot password?
+            </a>
             <ButtonField text="Continue" handleClick={HandleButtonClick} />
           </>
         ) : (
