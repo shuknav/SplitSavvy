@@ -13,6 +13,7 @@ import AdminLanding from "./pages/landing/AdminLanding";
 import Message from "./pages/misc/Message";
 import User from "./pages/user/User";
 import AdminRoutes from "./routes/AdminRoutes";
+import CreatePassword from "./pages/authentication/CreatePassword";
 
 //App functions defining all routes and structure of application
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/wip" element={<WIP />} />
           <Route path="/admin" element={<AdminLanding />} />
           <Route path="/user" element={<User />} />
+          <Route path="/setpassword" element={<CreatePassword />} />
           <Route path="/admin/*" element={<AdminRoutes />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -55,3 +55,28 @@ export async function RejectWaitlist(email) {
     console.log(err);
   }
 }
+
+export async function tokenValidation(token) {
+  try {
+    const res = await axios.get(`${baseURL}/waitlist/tokenverify`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function createPassword(token, password) {
+  try {
+    const res = await axios.post(`${baseURL}/waitlist/onboard`, {
+      token,
+      password,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
