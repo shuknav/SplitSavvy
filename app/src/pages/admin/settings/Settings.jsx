@@ -32,29 +32,15 @@ function Settings() {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="Password update" value="1" />
-            {isSuperUser ? (
-              <>
-                <Tab label="Create a new admin" value="2" />
-                <Tab label="Super user permissions" value="3" />
-              </>
-            ) : (
-              <Tooltip title="Only super user can access this">
-                <span>
-                  <Tab
-                    label="Create a new admin"
-                    value="2"
-                    disabled={!isSuperUser}
-                  />
-                  <Tab
-                    label="Super user permissions"
-                    value="3"
-                    disabled={!isSuperUser}
-                  />
-                </span>
-              </Tooltip>
-            )}
+            {isSuperUser && <Tab label="Create a new admin" value="2" />}
+            {isSuperUser && <Tab label="Super user permissions" value="3" />}
           </TabList>
         </Box>
+        {!isSuperUser && (
+          <Box sx={{ mt: 1, borderColor: "gray" }}>
+            only super admins can access additional settings
+          </Box>
+        )}
         <TabPanel value="1">
           <PasswordChange />
         </TabPanel>
