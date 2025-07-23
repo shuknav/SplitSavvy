@@ -7,6 +7,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ButtonField from "../../components/ButtonField";
 import { resetPassword } from "../../api/auth";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function LoginForm({
   handleVerify,
@@ -16,6 +18,8 @@ function LoginForm({
   passwordHelperText = "Password can't be empty",
   clearPasswordError,
 }) {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [inputData, setinputData] = useState({
     email: "",
@@ -89,8 +93,21 @@ function LoginForm({
     handleVerify(inputData.password);
   }
 
+  function handleClose(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  }
+
   async function handleForgotPassword() {
-    await resetPassword(email);
+    const res = await resetPassword(email);
+    if (res.success == true) {
+    } else {
+      setMessage(res.status + " " + res.message);
+      setOpen(true);
+    }
   }
 
   return (
@@ -179,6 +196,16 @@ function LoginForm({
           </>
         )}
       </main>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
