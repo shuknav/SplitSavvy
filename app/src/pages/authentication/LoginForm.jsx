@@ -6,6 +6,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ButtonField from "../../components/ButtonField";
+import { resetPassword } from "../../api/auth";
 
 function LoginForm({
   handleVerify,
@@ -88,8 +89,8 @@ function LoginForm({
     handleVerify(inputData.password);
   }
 
-  function handleForgotPassword() {
-    console.log(inputData.email);
+  async function handleForgotPassword() {
+    await resetPassword(email);
   }
 
   return (

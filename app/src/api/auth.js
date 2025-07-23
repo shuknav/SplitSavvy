@@ -61,3 +61,14 @@ export async function PassChangeResolver(oldPass, cNewPass) {
     throw err.response?.data || { error: "Something went wrong" };
   }
 }
+
+export async function resetPassword(email) {
+  try {
+    const res = await axios.post(`${baseURL}/auth/reset`, {
+      email,
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
