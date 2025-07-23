@@ -4,7 +4,6 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import Tooltip from "@mui/material/Tooltip";
 import PasswordChange from "./PasswordChange";
 import CreateAdmin from "./CreateAdmin";
 import SuperUserPermissions from "./SuperUserPermissions";
