@@ -18,6 +18,7 @@ function LoginForm({
   passwordHelperText = "Password can't be empty",
   clearPasswordError,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -102,7 +103,9 @@ function LoginForm({
   }
 
   async function handleForgotPassword() {
+    setIsLoading(true);
     const res = await resetPassword(email);
+    setIsLoading(false);
     if (res.success) {
       setIsError(false);
       setMessage(res.status + " " + res.message);
@@ -173,12 +176,21 @@ function LoginForm({
             <a
               role="button"
               tabIndex="0"
-              onClick={handleForgotPassword}
-              className="underline text-blue-400 hover:text-blue-500 mb-2 cursor-pointer"
+              onClick={isLoading ? null : handleForgotPassword}
+              aria-disabled={isLoading}
+              className={
+                isLoading
+                  ? "text-gray-200"
+                  : "underline text-blue-400 hover:text-blue-500 mb-2 cursor-pointer"
+              }
             >
               Forgot password?
             </a>
-            <ButtonField text="Continue" handleClick={HandleButtonClick} />
+            <ButtonField
+              text="Continue"
+              handleClick={HandleButtonClick}
+              loading={isLoading}
+            />
           </>
         ) : (
           <>
