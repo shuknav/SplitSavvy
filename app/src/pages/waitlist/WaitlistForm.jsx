@@ -4,7 +4,7 @@ import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
 
 function WaitlistForm({ onSubmit }) {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [inputData, setinputData] = useState({
     firstName: "",
     lastName: "",
@@ -124,9 +124,9 @@ function WaitlistForm({ onSubmit }) {
       }));
       return;
     }
-    setLoading(true);
+    setIsLoading(true);
     await onSubmit(inputData.firstName, inputData.lastName, inputData.email);
-    setLoading(false);
+    setIsLoading(false);
   }
 
   return (
@@ -169,7 +169,7 @@ function WaitlistForm({ onSubmit }) {
       <ButtonField
         text="Continue"
         handleClick={HandleButtonClick}
-        loading={loading}
+        loading={isLoading}
       />
       <p className="text-slate-300 max-w-xl mt-6">
         Already applied?{" "}
