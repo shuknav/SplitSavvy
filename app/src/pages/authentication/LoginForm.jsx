@@ -6,7 +6,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ButtonField from "../../components/ButtonField";
-import { resetPassword } from "../../api/auth";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
@@ -17,10 +16,12 @@ function LoginForm({
   passwordError = false,
   passwordHelperText = "Password can't be empty",
   clearPasswordError,
+  isLoading,
+  forgotPassword,
+  open,
+  message,
+  severity,
 }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [inputData, setinputData] = useState({
     email: "",
@@ -32,7 +33,6 @@ function LoginForm({
   });
 
   const [helperText, setHelperText] = useState("");
-  const [isError, setIsError] = useState();
 
   function CheckEmptyEmail(email) {
     if (email == "") {
@@ -102,19 +102,8 @@ function LoginForm({
     setOpen(false);
   }
 
-  async function handleForgotPassword() {
-    setIsLoading(true);
-    const res = await resetPassword(email);
-    setIsLoading(false);
-    if (res.success) {
-      setIsError(false);
-      setMessage(res.status + " " + res.message);
-      setOpen(true);
-    } else {
-      setIsError(true);
-      setMessage(res.status + " " + res.message);
-      setOpen(true);
-    }
+  async function handleForgotPasswordLink() {
+    forgotPassword();
   }
 
   return (
@@ -176,7 +165,7 @@ function LoginForm({
             <a
               role="button"
               tabIndex="0"
-              onClick={isLoading ? null : handleForgotPassword}
+              onClick={isLoading ? null : handleForgotPasswordLink}
               aria-disabled={isLoading}
               className={
                 isLoading
@@ -208,14 +197,18 @@ function LoginForm({
                 helperText={helperText}
               />
             </Box>
-            <ButtonField text="Continue" handleClick={HandleButtonClickEmail} />
+            <ButtonField
+              text="Continue"
+              handleClick={HandleButtonClickEmail}
+              loading={isLoading}
+            />
           </>
         )}
       </main>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
-          severity={isError ? "error" : "success"}
+          severity={severity ? "error" : "success"}
           variant="filled"
           sx={{ width: "100%" }}
         >

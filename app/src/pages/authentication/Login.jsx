@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { loginEmailCheck, loginVerify, TokenVerify } from "../../api/auth";
+import {
+  loginEmailCheck,
+  loginVerify,
+  TokenVerify,
+  resetPassword,
+} from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -12,6 +17,10 @@ function Login() {
   const [email, setEmail] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState();
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -33,6 +42,7 @@ function Login() {
 
   async function HandleLoginEmailCheck(email) {
     //verifies the email in user table
+    setIsLoading(true);
     try {
       const data = await loginEmailCheck(email);
       if (data.status == "user_exist") {
@@ -48,10 +58,12 @@ function Login() {
     } catch (err) {
       console.log(err);
     }
+    setIsLoading(false);
   }
 
   async function HandleLogin(password) {
     //verify the user using password authentication
+    setIsLoading(true);
     try {
       const data = await loginVerify(email, password);
       if (data.result == true) {
@@ -63,6 +75,22 @@ function Login() {
       }
     } catch (err) {
       console.log(err);
+    }
+    setIsLoading(false);
+  }
+
+  async function handleForgotPassword() {
+    setIsLoading(true);
+    const res = await resetPassword(email);
+    setIsLoading(false);
+    if (res.success) {
+      setIsError(false);
+      setMessage(res.status + " " + res.message);
+      setOpen(true);
+    } else {
+      setIsError(true);
+      setMessage(res.status + " " + res.message);
+      setOpen(true);
     }
   }
 
@@ -80,9 +108,17 @@ function Login() {
             passwordError={passwordError}
             passwordHelperText={passwordHelperText}
             clearPasswordError={clearPasswordError}
+            isLoading={isLoading}
+            forgotPassword={handleForgotPassword}
+            open={open}
+            message={message}
+            severity={isError}
           />
         ) : (
-          <LoginForm handleVerify={HandleLoginEmailCheck} />
+          <LoginForm
+            handleVerify={HandleLoginEmailCheck}
+            isLoading={isLoading}
+          />
         )}
         <Footer />
       </div>
