@@ -9,7 +9,6 @@ import ButtonField from "../../components/ButtonField";
 import { resetPassword } from "../../api/auth";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { useNavigate } from "react-router-dom";
 
 function LoginForm({
   handleVerify,
@@ -19,7 +18,6 @@ function LoginForm({
   passwordHelperText = "Password can't be empty",
   clearPasswordError,
 }) {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -33,6 +31,7 @@ function LoginForm({
   });
 
   const [helperText, setHelperText] = useState("");
+  const [isError, setIsError] = useState();
 
   function CheckEmptyEmail(email) {
     if (email == "") {
@@ -99,19 +98,17 @@ function LoginForm({
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   }
 
   async function handleForgotPassword() {
     const res = await resetPassword(email);
     if (res.success) {
-      navigate("/message", {
-        state: {
-          type: "resetmailsent",
-        },
-      });
+      setIsError(false);
+      setMessage(res.status + " " + res.message);
+      setOpen(true);
     } else {
+      setIsError(true);
       setMessage(res.status + " " + res.message);
       setOpen(true);
     }
@@ -206,7 +203,7 @@ function LoginForm({
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
-          severity="error"
+          severity={isError ? "error" : "success"}
           variant="filled"
           sx={{ width: "100%" }}
         >

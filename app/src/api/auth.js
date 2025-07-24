@@ -67,14 +67,14 @@ export async function resetPassword(email) {
     const res = await axios.post(`${baseURL}/auth/reset`, {
       email,
     });
-    return { success: true, data: res.data };
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
     return {
-      result: "error",
+      success: false,
       status: err?.response?.status || 500,
       message:
         err?.response?.data?.message ||
-        "Something went wrong. Please try again later.",
+        "Server unreachable. Please try again later.",
     };
   }
 }
