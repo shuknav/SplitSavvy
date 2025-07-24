@@ -79,6 +79,19 @@ const waitlistMessages = {
       },
     ],
   },
+  resetmailsent: {
+    heading: "📮 Password reset link sent!",
+    paragraphs: [
+      "We’ve sent a secure link to your registered email address to help you reset your password.",
+      "🕒 The link is valid for the next 15 minutes. Make sure to reset your password before it expires.",
+      "📩 If you don’t see the email, please check your spam or junk folder — sometimes they get a little too secure.",
+      {
+        text: "Didn’t receive the email?",
+        linkText: "Try again",
+        href: "/login",
+      },
+    ],
+  },
 };
 
 export default waitlistMessages;

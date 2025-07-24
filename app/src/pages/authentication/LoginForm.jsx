@@ -9,6 +9,7 @@ import ButtonField from "../../components/ButtonField";
 import { resetPassword } from "../../api/auth";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({
   handleVerify,
@@ -18,6 +19,7 @@ function LoginForm({
   passwordHelperText = "Password can't be empty",
   clearPasswordError,
 }) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -103,7 +105,12 @@ function LoginForm({
 
   async function handleForgotPassword() {
     const res = await resetPassword(email);
-    if (res.success == true) {
+    if (res.success) {
+      navigate("/message", {
+        state: {
+          type: "resetmailsent",
+        },
+      });
     } else {
       setMessage(res.status + " " + res.message);
       setOpen(true);
