@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TokenVerify } from "../../api/admin";
+import { tokenVerify } from "../../api/admin";
 
 function RequireAdminAuth({ children }) {
   const navigate = useNavigate();
@@ -13,16 +13,11 @@ function RequireAdminAuth({ children }) {
         navigate("/admin");
         return;
       }
-      try {
-        const data = await TokenVerify(token);
-        if (data.result === "Verified") {
-          setVerified(true);
-        } else {
-          sessionStorage.removeItem("token");
-          navigate("/admin");
-        }
-      } catch (err) {
-        console.log("token verification error", err);
+      const res = await tokenVerify(token);
+      if (res.success) {
+        setVerified(true);
+      } else {
+        sessionStorage.removeItem("Admin Token");
         navigate("/admin");
       }
     };

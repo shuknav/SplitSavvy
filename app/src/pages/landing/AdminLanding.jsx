@@ -75,7 +75,7 @@ function AdminLanding() {
     const res = await adminLogin(inputData.username, inputData.password);
     setIsLoading(false);
     if (res.success) {
-      sessionStorage.setItem("Admin Token", data.token);
+      sessionStorage.setItem("Admin Token", res.token);
       navigate("/admin/dashboard");
     } else {
       if (res.message === "Incorrect password") {

@@ -25,16 +25,22 @@ export async function adminLogin(username, password) {
   }
 }
 
-export async function TokenVerify(token) {
+export async function tokenVerify(token) {
   try {
     const res = await axios.get(`${baseURL}/admin/tokenverify`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. Please try again later.",
+    };
   }
 }
 
