@@ -12,6 +12,7 @@ function WaitlistCheck() {
   const [email, setEmail] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const [helperText, setHelperText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   function handleEmailChange(val) {
@@ -32,10 +33,11 @@ function WaitlistCheck() {
       setHelperText("Enter a valid email address");
       return;
     }
-
     setIsInvalid(false);
     try {
+      setIsLoading(true);
       const data = await checkInWaitlist(email);
+      setIsLoading(false);
       if (data.status == "user_exists") {
         navigate("/message", {
           state: {
@@ -86,7 +88,11 @@ function WaitlistCheck() {
             }}
           />
         </Box>
-        <ButtonField text={"Check Status"} handleClick={handleButtonClick} />
+        <ButtonField
+          text={"Check Status"}
+          handleClick={handleButtonClick}
+          loading={isLoading}
+        />
       </main>
       <Footer />
     </div>
