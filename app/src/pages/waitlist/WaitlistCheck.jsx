@@ -4,6 +4,7 @@ import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { isEmpty, isValidEmail } from "../../utils/validation";
 import { checkInWaitlist } from "../../api/waitlist";
 import { useNavigate } from "react-router-dom";
 
@@ -13,27 +14,15 @@ function WaitlistCheck() {
   const [helperText, setHelperText] = useState("");
   const navigate = useNavigate();
 
-  function HandleEmailChange(val) {
+  function handleEmailChange(val) {
     //function to handle input field changes
     setEmail(val);
     if (isInvalid) setIsInvalid(false);
   }
 
-  function CheckEmptyEmail(email) {
-    if (email == "") {
-      return true;
-    }
-    return false;
-  }
-
-  function isValidEmail(email) {
-    //function to validate user input email address
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  async function HandleButtonClick() {
+  async function handleButtonClick() {
     //button responsible for validation and checking the status of the people in waitlist
-    if (CheckEmptyEmail(email)) {
+    if (isEmpty(email)) {
       setIsInvalid(true);
       setHelperText("Email can't be empty");
       return;
@@ -93,11 +82,11 @@ function WaitlistCheck() {
             helperText={helperText}
             value={email}
             handleChange={(val) => {
-              HandleEmailChange(val);
+              handleEmailChange(val);
             }}
           />
         </Box>
-        <ButtonField text={"Check Status"} handleClick={HandleButtonClick} />
+        <ButtonField text={"Check Status"} handleClick={handleButtonClick} />
       </main>
       <Footer />
     </div>
