@@ -2,15 +2,26 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BACKEND_URL;
 
-export async function AdminLogin(username, password) {
+export async function adminLogin(username, password) {
   try {
     const res = await axios.post(`${baseURL}/admin/verify`, {
       username,
       password,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      token: res.data.token,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. Please try again later.",
+    };
   }
 }
 

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
-import { AdminLogin } from "../../api/admin";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { adminLogin } from "../../api/admin";
 import { useNavigate } from "react-router-dom";
 
 function AdminLanding() {
@@ -17,6 +19,9 @@ function AdminLanding() {
     };
     verifyToken();
   }, []);
+
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const [inputData, setinputData] = useState({
     username: "",
@@ -53,7 +58,14 @@ function AdminLanding() {
     }
   }
 
-  async function HandleClick() {
+  function handleClose(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  }
+
+  async function handleClick() {
     if (CheckEmptyUsername(inputData.username)) {
       setIsInvalid((prev) => ({ ...prev, username: true }));
       setHelperText((prev) => ({
@@ -70,26 +82,21 @@ function AdminLanding() {
       }));
       return;
     }
-    try {
-      const data = await AdminLogin(inputData.username, inputData.password);
-      if (data.result == true && data.message === "welcome") {
-        sessionStorage.setItem("Admin Token", data.token);
-        navigate("/admin/dashboard");
-      } else if (data.result == false && data.message === "wrngpass") {
+    const res = await adminLogin(inputData.username, inputData.password);
+    if (res.success) {
+      sessionStorage.setItem("Admin Token", data.token);
+      navigate("/admin/dashboard");
+    } else {
+      if (res.message === "Incorrect password") {
         setIsInvalid((prev) => ({ ...prev, password: true }));
         setHelperText((prev) => ({
           ...prev,
           password: "Incorrect password",
         }));
-      } else if (data.result == false && data.message === "notadmin") {
-        setIsInvalid((prev) => ({ ...prev, username: true }));
-        setHelperText((prev) => ({
-          ...prev,
-          username: "Incorrect username",
-        }));
+      } else {
+        setMessage(res.status + " " + res.message);
+        setOpen(true);
       }
-    } catch (err) {
-      console.error("Login failed:", err);
     }
   }
 
@@ -121,8 +128,18 @@ function AdminLanding() {
             helperText={helperText.password}
           />
         </Box>
-        <ButtonField text="Continue" handleClick={HandleClick} />
+        <ButtonField text="Continue" handleClick={handleClick} />
       </main>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
