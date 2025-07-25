@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../components/InputField";
 import ButtonField from "../../components/ButtonField";
+import { isEmpty, isValidEmail, isValidName } from "../../utils/validation";
 
 function WaitlistForm({ onSubmit }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,51 +23,7 @@ function WaitlistForm({ onSubmit }) {
     email: "",
   });
 
-  function CheckEmptyFirstName(firstName) {
-    if (firstName == "") {
-      return true;
-    }
-    return false;
-  }
-
-  function CheckEmptyLastName(lastName) {
-    if (lastName == "") {
-      return true;
-    }
-    return false;
-  }
-
-  function CheckEmptyEmail(email) {
-    if (email == "") {
-      return true;
-    }
-    return false;
-  }
-
-  function isValidEmail(email) {
-    //function to validate email entered by user
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function isValidFirstName(fName) {
-    const trimmed = fName.trim();
-    return (
-      /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[' -][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/.test(trimmed) &&
-      trimmed.length >= 2 &&
-      trimmed.length <= 30
-    );
-  }
-
-  function isValidLastName(lName) {
-    const trimmed = lName.trim();
-    return (
-      /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[' -][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/.test(trimmed) &&
-      trimmed.length >= 2 &&
-      trimmed.length <= 30
-    );
-  }
-
-  function HandleInputChange(field, value) {
+  function handleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
     if (isInvalid[field]) {
@@ -74,55 +31,45 @@ function WaitlistForm({ onSubmit }) {
     }
   }
 
-  async function HandleButtonClick() {
+  async function handleButtonClick() {
     //button responsible for validating email and adding user to waitlist
-    if (CheckEmptyFirstName(inputData.firstName)) {
-      setIsInvalid((prev) => ({ ...prev, firstName: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        firstName: "First name can't be empty",
-      }));
-      return;
-    }
-    if (!isValidFirstName(inputData.firstName)) {
-      setIsInvalid((prev) => ({ ...prev, firstName: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        firstName: "Enter a valid first name",
-      }));
-      return;
-    }
-    if (CheckEmptyLastName(inputData.lastName)) {
-      setIsInvalid((prev) => ({ ...prev, lastName: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        lastName: "Last name can't be empty",
-      }));
-      return;
-    }
-    if (!isValidLastName(inputData.lastName)) {
-      setIsInvalid((prev) => ({ ...prev, lastName: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        lastName: "Enter a valid last name",
-      }));
-      return;
-    }
-    if (CheckEmptyEmail(inputData.email)) {
-      setIsInvalid((prev) => ({ ...prev, email: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        email: "Email can't be empty",
-      }));
-      return;
-    }
-    if (!isValidEmail(inputData.email)) {
-      setIsInvalid((prev) => ({ ...prev, email: true }));
-      setHelperText((prev) => ({
-        ...prev,
-        email: "Enter a valid email",
-      }));
-      return;
+    const fields = [
+      {
+        key: "firstName",
+        value: inputData.firstName,
+        validate: isValidName,
+        emptyMessage: "First name can't be empty",
+        invalidMessage: "Enter a valid first name",
+      },
+      {
+        key: "lastName",
+        value: inputData.lastName,
+        validate: isValidName,
+        emptyMessage: "Last name can't be empty",
+        invalidMessage: "Enter a valid last name",
+      },
+      {
+        key: "email",
+        value: inputData.email,
+        validate: isValidEmail,
+        emptyMessage: "Email can't be empty",
+        invalidMessage: "Enter a valid email",
+      },
+    ];
+    for (const field of fields) {
+      if (isEmpty(field.value)) {
+        setIsInvalid((prev) => ({ ...prev, [field.key]: true }));
+        setHelperText((prev) => ({ ...prev, [field.key]: field.emptyMessage }));
+        return;
+      }
+      if (!field.validate(field.value)) {
+        setIsInvalid((prev) => ({ ...prev, [field.key]: true }));
+        setHelperText((prev) => ({
+          ...prev,
+          [field.key]: field.invalidMessage,
+        }));
+        return;
+      }
     }
     setIsLoading(true);
     await onSubmit(inputData.firstName, inputData.lastName, inputData.email);
@@ -136,7 +83,7 @@ function WaitlistForm({ onSubmit }) {
           isInvalid={isInvalid.firstName}
           helperText={helperText.firstName}
           handleChange={(val) => {
-            HandleInputChange("firstName", val);
+            handleInputChange("firstName", val);
           }}
           label="First Name"
           id="fName"
@@ -147,7 +94,7 @@ function WaitlistForm({ onSubmit }) {
           isInvalid={isInvalid.lastName}
           helperText={helperText.lastName}
           handleChange={(val) => {
-            HandleInputChange("lastName", val);
+            handleInputChange("lastName", val);
           }}
           label="Last Name"
           id="lName"
@@ -158,7 +105,7 @@ function WaitlistForm({ onSubmit }) {
           isInvalid={isInvalid.email}
           helperText={helperText.email}
           handleChange={(val) => {
-            HandleInputChange("email", val);
+            handleInputChange("email", val);
           }}
           label="Email Address"
           id="email"
@@ -168,7 +115,7 @@ function WaitlistForm({ onSubmit }) {
       </Box>
       <ButtonField
         text="Continue"
-        handleClick={HandleButtonClick}
+        handleClick={handleButtonClick}
         loading={isLoading}
       />
       <p className="text-slate-300 max-w-xl mt-6">
