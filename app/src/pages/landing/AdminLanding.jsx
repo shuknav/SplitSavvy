@@ -6,6 +6,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { adminLogin } from "../../api/admin";
 import { useNavigate } from "react-router-dom";
+import { isEmpty } from "../../utils/validation";
 
 function AdminLanding() {
   const navigate = useNavigate();
@@ -36,21 +37,9 @@ function AdminLanding() {
     password: "",
   });
 
-  function CheckEmptyUsername(username) {
-    if (username == "") {
-      return true;
-    }
-    return false;
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
-  function CheckEmptyPassword(password) {
-    if (password == "") {
-      return true;
-    }
-    return false;
-  }
-
-  function HandleInputChange(field, value) {
+  function handleInputChange(field, value) {
     //function handles input fields change
     setinputData((prev) => ({ ...prev, [field]: value }));
     if (isInvalid[field]) {
@@ -66,7 +55,7 @@ function AdminLanding() {
   }
 
   async function handleClick() {
-    if (CheckEmptyUsername(inputData.username)) {
+    if (isEmpty(inputData.username)) {
       setIsInvalid((prev) => ({ ...prev, username: true }));
       setHelperText((prev) => ({
         ...prev,
@@ -74,7 +63,7 @@ function AdminLanding() {
       }));
       return;
     }
-    if (CheckEmptyPassword(inputData.password)) {
+    if (isEmpty(inputData.password)) {
       setIsInvalid((prev) => ({ ...prev, password: true }));
       setHelperText((prev) => ({
         ...prev,
@@ -82,7 +71,9 @@ function AdminLanding() {
       }));
       return;
     }
+    setIsLoading(true);
     const res = await adminLogin(inputData.username, inputData.password);
+    setIsLoading(false);
     if (res.success) {
       sessionStorage.setItem("Admin Token", data.token);
       navigate("/admin/dashboard");
@@ -111,7 +102,7 @@ function AdminLanding() {
             type="text"
             value={inputData.username}
             handleChange={(val) => {
-              HandleInputChange("username", val);
+              handleInputChange("username", val);
             }}
             isInvalid={isInvalid.username}
             helperText={helperText.username}
@@ -122,13 +113,17 @@ function AdminLanding() {
             type="password"
             value={inputData.password}
             handleChange={(val) => {
-              HandleInputChange("password", val);
+              handleInputChange("password", val);
             }}
             isInvalid={isInvalid.password}
             helperText={helperText.password}
           />
         </Box>
-        <ButtonField text="Continue" handleClick={handleClick} />
+        <ButtonField
+          text="Continue"
+          handleClick={handleClick}
+          loading={isLoading}
+        />
       </main>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert
