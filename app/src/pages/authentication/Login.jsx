@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {
@@ -94,6 +96,13 @@ function Login() {
     }
   }
 
+  function handleClose(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  }
+
   // structure of the login page
   return (
     <>
@@ -110,9 +119,6 @@ function Login() {
             clearPasswordError={clearPasswordError}
             isLoading={isLoading}
             forgotPassword={handleForgotPassword}
-            open={open}
-            message={message}
-            severity={isError}
           />
         ) : (
           <LoginForm
@@ -122,6 +128,16 @@ function Login() {
         )}
         <Footer />
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity={isError ? "error" : "success"}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

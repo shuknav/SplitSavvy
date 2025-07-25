@@ -6,8 +6,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ButtonField from "../../components/ButtonField";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 
 function LoginForm({
   handleVerify,
@@ -18,9 +16,6 @@ function LoginForm({
   clearPasswordError,
   isLoading,
   forgotPassword,
-  open,
-  message,
-  severity,
 }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [inputData, setinputData] = useState({
@@ -93,13 +88,6 @@ function LoginForm({
       return;
     }
     handleVerify(inputData.password);
-  }
-
-  function handleClose(event, reason) {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
   }
 
   async function handleForgotPasswordLink() {
@@ -205,16 +193,6 @@ function LoginForm({
           </>
         )}
       </main>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={severity ? "error" : "success"}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }
