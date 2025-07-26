@@ -44,16 +44,22 @@ export async function tokenVerify(token) {
   }
 }
 
-export async function PasswordUpdate(oldPassword, newPassword, token) {
+export async function passwordUpdate(oldPassword, newPassword, token) {
   try {
     const res = await axios.post(`${baseURL}/admin/passwordupdate`, {
       oldPassword,
       newPassword,
       token,
     });
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. Please try again later.",
+    };
   }
 }
 

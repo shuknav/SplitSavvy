@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
-import { PasswordUpdate } from "../../../api/admin";
+import { passwordUpdate } from "../../../api/admin";
 
 function PasswordChange() {
   const [inputData, setinputData] = useState({
@@ -79,19 +79,19 @@ function PasswordChange() {
       return;
     } else {
       if (inputData.newPassword === inputData.confirmNewPassword) {
-        const res = await PasswordUpdate(
+        const res = await passwordUpdate(
           inputData.oldPassword,
           inputData.confirmNewPassword,
           sessionStorage.getItem("Admin Token")
         );
-        if (res.result === "wrngpassword") {
+        if (!res.success && res.message === "Incorrect current password") {
           setIsInvalid((prev) => ({
             ...prev,
             oldPassword: true,
           }));
           setHelperText((prev) => ({
             ...prev,
-            oldPassword: "Incorrect password",
+            oldPassword: "Incorrect current password",
           }));
         }
       } else {
