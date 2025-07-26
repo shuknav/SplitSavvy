@@ -89,7 +89,7 @@ export async function fetchAdminList() {
       success: true,
       status: res.status,
       message: res.data.message,
-      Adminlist: res.data.list,
+      adminList: res.data.list,
     };
   } catch (err) {
     return {
