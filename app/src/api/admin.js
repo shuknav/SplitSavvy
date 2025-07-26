@@ -63,47 +63,81 @@ export async function passwordUpdate(oldPassword, newPassword, token) {
   }
 }
 
-export async function AdminAdd(username, password, superUser) {
+export async function adminAdd(username, password, superUser) {
   try {
     const res = await axios.post(`${baseURL}/admin/add`, {
       username,
       password,
       superUser,
     });
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. Please try adain later.",
+    };
   }
 }
 
-export async function FetchAdminList() {
+export async function fetchAdminList() {
   try {
     const res = await axios.post(`${baseURL}/admin/list`);
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      Adminlist: res.data.list,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
-export async function SuperUserPermissionsUpdate(username, superUser) {
+export async function superUserPermissionsUpdate(username, superUser) {
   try {
     const res = await axios.post(`${baseURL}/admin/superuserpermissions`, {
       username,
       superUser,
     });
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
-export async function superUser(token) {
+export async function isSuperUser(token) {
   try {
     const res = await axios.post(`${baseURL}/admin/issuperuser`, {
       token,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      superUser: res.data.superUser,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
