@@ -3,16 +3,26 @@ import axios from "axios";
 const baseURL = import.meta.env.VITE_BACKEND_URL;
 //api handling page for waitlist page
 
-export async function submitToWaitlist(firstName, lastName, email) {
+export async function addToWaitlist(firstName, lastName, email) {
   try {
     const res = await axios.post(`${baseURL}/waitlist/add`, {
       firstName,
       lastName,
       email,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+    };
   } catch (err) {
-    throw err.response?.data || { error: "Something went wrong" };
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -34,7 +44,7 @@ export async function fetchWaitlistData() {
   }
 }
 
-export async function ApproveWaitlist(email) {
+export async function approveWaitlist(email) {
   try {
     const res = await axios.post(`${baseURL}/waitlist/approve`, {
       email,
@@ -45,7 +55,7 @@ export async function ApproveWaitlist(email) {
   }
 }
 
-export async function RejectWaitlist(email) {
+export async function rejectWaitlist(email) {
   try {
     const res = await axios.post(`${baseURL}/waitlist/reject`, {
       email,
@@ -69,7 +79,7 @@ export async function tokenValidation(token) {
   }
 }
 
-export async function createPassword(token, password) {
+export async function onBoard(token, password) {
   try {
     const res = await axios.post(`${baseURL}/waitlist/onboard`, {
       token,

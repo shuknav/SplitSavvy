@@ -6,9 +6,15 @@ const baseURL = import.meta.env.VITE_BACKEND_URL;
 export async function loginEmailCheck(email) {
   try {
     const res = await axios.get(`${baseURL}/auth/check?email=${email}`);
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    throw err.response?.data || { error: "Something went wrong" };
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -18,39 +24,67 @@ export async function loginVerify(email, password) {
       email,
       password,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      userToken: res.data.token,
+    };
   } catch (err) {
-    throw err.response?.data || { error: "Something went wrong" };
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
-export async function TokenVerify(token) {
+export async function tokenVerify(token) {
   try {
     const res = await axios.get(`${baseURL}/auth/tokenverify`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data;
+    return { success: true, status: res.status, message: res.data.message };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
-export async function UserDetails(token) {
+export async function userDetails(token) {
   try {
     const res = await axios.get(`${baseURL}/auth/userdetails`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      userInfo: res.data.userInfo,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
-export async function PassChangeResolver(oldPass, cNewPass) {
+export async function passChangeResolver(oldPass, cNewPass) {
   try {
     const res = await axios.post(`${baseURL}/auth/passchange`, {
       oldPass,
