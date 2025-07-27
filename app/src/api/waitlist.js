@@ -29,18 +29,39 @@ export async function addToWaitlist(firstName, lastName, email) {
 export async function checkInWaitlist(email) {
   try {
     const res = await axios.get(`${baseURL}/waitlist/check?email=${email}`);
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+    };
   } catch (err) {
-    throw err.response?.data || { error: "Something went wrong" };
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
 export async function fetchWaitlistData() {
   try {
     const res = await axios.post(`${baseURL}/waitlist/list`);
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      result: res.data.result,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -49,9 +70,19 @@ export async function approveWaitlist(email) {
     const res = await axios.post(`${baseURL}/waitlist/approve`, {
       email,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -60,9 +91,19 @@ export async function rejectWaitlist(email) {
     const res = await axios.post(`${baseURL}/waitlist/reject`, {
       email,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -73,9 +114,20 @@ export async function tokenValidation(token) {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+      mode: res.data.mode,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
 
@@ -85,8 +137,18 @@ export async function onBoard(token, password) {
       token,
       password,
     });
-    return res.data;
+    return {
+      success: true,
+      status: res.status,
+      message: res.data.message,
+    };
   } catch (err) {
-    console.log(err);
+    return {
+      success: false,
+      status: err?.response?.status || 500,
+      message:
+        err?.response?.data?.message ||
+        "Server unreachable. please try again later.",
+    };
   }
 }
