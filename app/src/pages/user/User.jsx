@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TokenVerify, UserDetails } from "../../api/auth";
+import { tokenVerify, userDetails } from "../../api/auth";
 
 function User() {
   const navigate = useNavigate();
@@ -12,14 +12,14 @@ function User() {
         navigate("/login");
       }
       if (isToken) {
-        const data = await TokenVerify(isToken);
+        const data = await tokenVerify(isToken);
         if (
           data.result === "No token" ||
           data.result === "Invalid or expired token"
         ) {
           navigate("/login");
         } else if (data.result === "Verified") {
-          const res = await UserDetails(isToken);
+          const res = await userDetails(isToken);
           sessionStorage.setItem("First Name", res.firstName);
           sessionStorage.setItem("Last Name", res.lastName);
           sessionStorage.setItem("email", res.email);

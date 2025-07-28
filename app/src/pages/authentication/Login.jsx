@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import {
   loginEmailCheck,
   loginVerify,
-  TokenVerify,
+  tokenVerify,
   resetPassword,
 } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ function Login() {
     const verifyToken = async () => {
       const isToken = localStorage.getItem("User Token");
       if (isToken) {
-        const data = await TokenVerify(isToken);
+        const data = await tokenVerify(isToken);
         if (data.result === "Verified") {
           navigate("/user");
         }

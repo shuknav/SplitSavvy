@@ -9,8 +9,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import { useSearchParams } from "react-router-dom";
-import { tokenValidation } from "../../api/waitlist";
-import { createPassword } from "../../api/waitlist";
+import { onBoard, tokenValidation } from "../../api/waitlist";
 
 function CreatePassword() {
   const [searchParams] = useSearchParams();
@@ -98,7 +97,7 @@ function CreatePassword() {
         return;
       }
       if (inputData.newPassword === inputData.confirmNewPassword) {
-        const res = await createPassword(token, inputData.newPassword);
+        const res = await onBoard(token, inputData.newPassword);
         console.log(res);
       }
     }

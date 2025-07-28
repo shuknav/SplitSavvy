@@ -4,7 +4,7 @@ import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { AdminAdd } from "../../../api/admin";
+import { adminAdd } from "../../../api/admin";
 
 function CreateAdmin() {
   const [inputData, setinputData] = useState({
@@ -62,7 +62,7 @@ function CreateAdmin() {
       }));
       return;
     }
-    const res = await AdminAdd(
+    const res = await adminAdd(
       inputData.username,
       inputData.password,
       superUser

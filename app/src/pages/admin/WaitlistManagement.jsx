@@ -8,8 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import ButtonField from "../../components/ButtonField";
 import { fetchWaitlistData } from "../../api/waitlist";
-import { ApproveWaitlist } from "../../api/waitlist";
-import { RejectWaitlist } from "../../api/waitlist";
+import { approveWaitlist } from "../../api/waitlist";
+import { rejectWaitlist } from "../../api/waitlist";
 
 function WaitistManagement() {
   const [waitlistData, setWaitlistData] = useState([]);
@@ -24,12 +24,12 @@ function WaitistManagement() {
   }, [update]);
 
   async function HandleApprove(email) {
-    await ApproveWaitlist(email);
+    await approveWaitlist(email);
     setUpdate(!update);
   }
 
   async function HandleReject(email) {
-    await RejectWaitlist(email);
+    await rejectWaitlist(email);
     setUpdate(!update);
   }
 

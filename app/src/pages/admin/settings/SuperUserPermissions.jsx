@@ -8,25 +8,25 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import Tooltip from "@mui/material/Tooltip";
-import { FetchAdminList } from "../../../api/admin";
-import { SuperUserPermissionsUpdate } from "../../../api/admin";
+import { fetchAdminList } from "../../../api/admin";
+import { superUserPermissionsUpdate } from "../../../api/admin";
 
 function SuperUserPermissions() {
   const [adminList, setAdminList] = useState([]);
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    const fetchAdminList = async () => {
-      const res = await FetchAdminList();
+    const fetchAdmin = async () => {
+      const res = await fetchAdminList();
       setAdminList(res.result);
     };
-    fetchAdminList();
+    fetchAdmin();
   }, [update]);
 
   async function HandleSuperUser(username) {
     const admin = adminList.find((admin) => admin.username === username);
     if (admin) {
-      const res = await SuperUserPermissionsUpdate(username, !admin.super_user);
+      const res = await superUserPermissionsUpdate(username, !admin.super_user);
       if (res.result == "success") {
         setUpdate((prev) => !prev);
       }

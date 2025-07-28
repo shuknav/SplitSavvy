@@ -7,7 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import PasswordChange from "./PasswordChange";
 import CreateAdmin from "./CreateAdmin";
 import SuperUserPermissions from "./SuperUserPermissions";
-import { superUser } from "../../../api/admin";
+import { isSuperUser } from "../../../api/admin";
 
 function Settings() {
   const [value, setValue] = useState("1");
@@ -19,7 +19,7 @@ function Settings() {
 
   useEffect(() => {
     const verifySuperUser = async () => {
-      const res = await superUser(sessionStorage.getItem("Admin Token"));
+      const res = await isSuperUser(sessionStorage.getItem("Admin Token"));
       setIsSuperUser(res.result);
     };
     verifySuperUser();
