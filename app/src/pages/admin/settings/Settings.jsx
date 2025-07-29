@@ -11,7 +11,7 @@ import { isSuperUser } from "../../../api/admin";
 
 function Settings() {
   const [value, setValue] = useState("1");
-  const [isSuperUser, setIsSuperUser] = useState(false);
+  const [isSuperUserLocal, setIsSuperUserLocal] = useState(false);
 
   const handleChange = (event, value) => {
     setValue(value);
@@ -20,7 +20,7 @@ function Settings() {
   useEffect(() => {
     const verifySuperUser = async () => {
       const res = await isSuperUser(sessionStorage.getItem("Admin Token"));
-      setIsSuperUser(res.result);
+      setIsSuperUserLocal(res.superUser);
     };
     verifySuperUser();
   }, []);
@@ -31,11 +31,13 @@ function Settings() {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="Password update" value="1" />
-            {isSuperUser && <Tab label="Create a new admin" value="2" />}
-            {isSuperUser && <Tab label="Super user permissions" value="3" />}
+            {isSuperUserLocal && <Tab label="Create a new admin" value="2" />}
+            {isSuperUserLocal && (
+              <Tab label="Super user permissions" value="3" />
+            )}
           </TabList>
         </Box>
-        {!isSuperUser && (
+        {!isSuperUserLocal && (
           <Box sx={{ mt: 1, borderColor: "gray" }}>
             only super admins can access additional settings
           </Box>
