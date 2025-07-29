@@ -67,7 +67,7 @@ function CreateAdmin() {
       inputData.password,
       superUser
     );
-    if (res.result === "notavailable") {
+    if (!res.success && res.message === "Username not available") {
       setIsInvalid((prev) => ({ ...prev, username: true }));
       setHelperText((prev) => ({
         ...prev,
