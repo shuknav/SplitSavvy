@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import WaitlistForm from "./WaitlistForm";
 import { useNavigate } from "react-router-dom";
 import { addToWaitlist } from "../../api/waitlist";
 
@@ -8,23 +9,24 @@ function Waitlist() {
   const navigate = useNavigate();
   async function handleWaitlistSubmit(firstName, lastName, email) {
     //button responsible for validating email and adding user to waitlist
-    // setIsInvalid(false);
     try {
-      const data = await addToWaitlist(firstName, lastName, email);
-      console.log("success", data);
-      if (data.status === "user_exists") {
-        navigate("/message", {
-          state: {
-            type: "user",
-          },
-        });
-      } else if (data.status === "already_waitlisted") {
-        navigate("/message", {
-          state: {
-            type: "already",
-          },
-        });
-      } else {
+      const res = await addToWaitlist(firstName, lastName, email);
+      if (!res.success) {
+        if (res.message === "User exists") {
+          navigate("/message", {
+            state: {
+              type: "user",
+            },
+          });
+        } else if (res.message === "Already waitlisted") {
+          navigate("/message", {
+            state: {
+              type: "already",
+            },
+          });
+        }
+      }
+      if (res.success && res.message === "Waitlisted") {
         navigate("/message", {
           state: {
             type: "success",
