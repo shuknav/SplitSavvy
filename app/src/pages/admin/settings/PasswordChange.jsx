@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import InputField from "../../../components/InputField";
 import ButtonField from "../../../components/ButtonField";
 import { passwordUpdate } from "../../../api/admin";
+import { useNavigate } from "react-router-dom";
 
 function PasswordChange() {
+  const navigate = useNavigate();
   const [inputData, setinputData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -84,7 +86,13 @@ function PasswordChange() {
           inputData.confirmNewPassword,
           sessionStorage.getItem("Admin Token")
         );
-        if (!res.success && res.message === "Incorrect current password") {
+        if (res.success) {
+          sessionStorage.removeItem("Admin Token");
+          navigate("/admin");
+        } else if (
+          !res.success &&
+          res.message === "Incorrect current password"
+        ) {
           setIsInvalid((prev) => ({
             ...prev,
             oldPassword: true,

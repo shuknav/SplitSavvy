@@ -18,20 +18,20 @@ function SuperUserPermissions() {
   useEffect(() => {
     const fetchAdmin = async () => {
       const res = await fetchAdminList();
-      setAdminList(res.result);
+      if (res.success) {
+        setAdminList(res.adminList);
+      }
     };
     fetchAdmin();
   }, [update]);
 
-  async function HandleSuperUser(username) {
+  async function handleSuperUser(username) {
     const admin = adminList.find((admin) => admin.username === username);
     if (admin) {
       const res = await superUserPermissionsUpdate(username, !admin.super_user);
-      if (res.result == "success") {
+      if (res.success) {
         setUpdate((prev) => !prev);
       }
-    } else {
-      console.log(`Admin with username "${username}" not found.`);
     }
   }
 
@@ -63,7 +63,7 @@ function SuperUserPermissions() {
                     <Checkbox
                       checked={admin.super_user}
                       onChange={() => {
-                        HandleSuperUser(admin.username);
+                        handleSuperUser(admin.username);
                       }}
                     />
                   )}
