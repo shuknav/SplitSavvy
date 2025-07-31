@@ -11,27 +11,33 @@ function Waitlist() {
   }
 
   return (
-    <div className="px-6 py-16 max-w-6xl mx-auto text-left text-white">
-      <h2 className="text-4xl font-bold mb-4">
-        Ready to Simplify Your Shared Living?
-      </h2>
-      <p className="text-slate-300 mb-10 max-w-2xl">
-        SplitSavvy is currently invite-only. Join the wishlist or get a referral
-        from someone already using the platform to access early.
-      </p>
+    <div className="bg-[#e5f3ff] py-20 px-6">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-[#111827] mb-6">
+          Ready to split smart?
+        </h2>
 
-      <Button
-        onClick={HandleButtonClick}
-        variant="contained"
-        sx={{
-          textTransform: "none",
-          borderRadius: 999,
-          paddingX: 4,
-          paddingY: 1.5,
-        }}
-      >
-        Join Waitlist
-      </Button>
+        <Button
+          onClick={HandleButtonClick}
+          variant="contained"
+          sx={{
+            backgroundColor: "#a6ead2",
+            color: "#111827",
+            fontWeight: 600,
+            fontSize: { xs: "0.875rem", md: "1rem" },
+            paddingY: "10px",
+            paddingX: "24px",
+            borderRadius: "8px",
+            textTransform: "none",
+            transition: "background-color 0.2s ease-in-out",
+            "&:hover": {
+              backgroundColor: "#34D399",
+            },
+          }}
+        >
+          Join Waitlist
+        </Button>
+      </div>
     </div>
   );
 }
