@@ -1,4 +1,5 @@
 ﻿# SplitSavvy – Frontend
+paused for a week 
 
 SplitSavvy is a full-stack web application designed to simplify shared living.  
 The frontend is built using **React**, **MUI**, and **Tailwind CSS** for a clean and responsive UI experience.
